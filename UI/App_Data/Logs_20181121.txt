@@ -1,0 +1,193 @@
+2018-11-21 11:42:45,980 [25] ERROR Logger - System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 UI.Models.LoginCheckFilterAttribute.OnActionExecuting(ActionExecutingContext filterContext) 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Models\LoginCheckFilterAttribute.cs:行号 34
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+2018-11-21 11:44:58,350 [33] ERROR Logger - System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 UI.Models.LoginCheckFilterAttribute.OnActionExecuting(ActionExecutingContext filterContext) 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Models\LoginCheckFilterAttribute.cs:行号 34
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+2018-11-21 11:46:25,461 [30] ERROR Logger - System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 UI.Models.LoginCheckFilterAttribute.OnActionExecuting(ActionExecutingContext filterContext) 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Models\LoginCheckFilterAttribute.cs:行号 34
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+2018-11-21 11:47:23,286 [21] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 11:47:23,343 [21] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 11:47:23,508 [21] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 11:53:17,781 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 11:53:18,159 [6] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 11:53:18,651 [6] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 11:53:51,777 [9] ERROR Logger - System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 UI.Models.LoginCheckFilterAttribute.OnActionExecuting(ActionExecutingContext filterContext) 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Models\LoginCheckFilterAttribute.cs:行号 34
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+2018-11-21 11:54:34,859 [8] ERROR Logger - System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 UI.Models.LoginCheckFilterAttribute.OnActionExecuting(ActionExecutingContext filterContext) 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Models\LoginCheckFilterAttribute.cs:行号 34
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+2018-11-21 11:58:39,866 [14] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 11:58:39,914 [14] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 11:58:40,081 [14] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 11:59:17,089 [23] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 11:59:17,142 [23] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 11:59:17,375 [23] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 11:59:17,390 [23] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: cb4bfab7-e6ef-4c67-842b-96ad6d9a245f
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryHeaderEnum binaryHeaderEnum)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-11-21 11:59:17,397 [23] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: cb4bfab7-e6ef-4c67-842b-96ad6d9a245f
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: cb4bfab7-e6ef-4c67-842b-96ad6d9a245f ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryHeaderEnum binaryHeaderEnum)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-11-21 11:59:52,776 [38] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 11:59:52,799 [38] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 11:59:53,044 [38] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 11:59:53,062 [38] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: 2cb54a23-dc05-46ad-ac57-3bad293b43da
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryHeaderEnum binaryHeaderEnum)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-11-21 11:59:53,067 [38] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: 2cb54a23-dc05-46ad-ac57-3bad293b43da
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: 2cb54a23-dc05-46ad-ac57-3bad293b43da ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryHeaderEnum binaryHeaderEnum)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-11-21 12:08:06,921 [15] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 12:08:06,968 [15] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 12:08:07,134 [15] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 13:50:04,714 [46] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 13:50:04,767 [46] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 13:50:04,930 [46] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 13:51:22,752 [66] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 13:51:22,789 [66] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 13:51:22,955 [66] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 13:51:23,989 [66] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 14:05:36,612 [7] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 14:05:36,689 [7] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 14:05:36,856 [7] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 14:10:57,467 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 14:10:58,669 [6] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 14:10:59,950 [6] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 14:11:01,449 [6] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: e65bedf4-6b53-4aa3-b16a-7a916f3860ac
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-11-21 14:11:02,750 [6] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: e65bedf4-6b53-4aa3-b16a-7a916f3860ac
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: e65bedf4-6b53-4aa3-b16a-7a916f3860ac ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)

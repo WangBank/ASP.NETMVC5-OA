@@ -11,7 +11,8 @@ namespace Common.Cache
         {
             //初始化memcached
             //分布Memcachedf服务IP 端口
-            string[] servers = { "192.168.5.10:11211" };
+            string[] servers = System.Configuration.ConfigurationManager.AppSettings["MemcachedAddress"].Split(','); ;
+            //string[] servers = { "192.168.5.19:11211" };
 
             //初始化池
             SockIOPool pool = SockIOPool.GetInstance();

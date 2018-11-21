@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ServiceStack.Redis;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace Common
 {
     public  class LogHelper
     {
+        
         public static Queue<string> ExceptionStringqueue = new Queue<string>();
         public static List<ILogWriter> logWriterList = new List<ILogWriter>();
         /// <summary>

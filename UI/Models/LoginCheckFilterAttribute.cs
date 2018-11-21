@@ -31,17 +31,25 @@ namespace UI.Models
             //    LoginUser = filterContext.HttpContext.Session["LoginUser"] as UserInfo;
             //}
             if (IsCheck) {
-                string userid = filterContext.HttpContext.Request.Cookies["userid"].Value.ToString();
-                var s = CacheHelper.GetCache("userid");
-                if (CacheHelper.GetCache(userid) != null)
-                {
-                    LoginUser =(UserInfo) CacheHelper.GetCache(filterContext.HttpContext.Request.Cookies["userid"].Value);
-                    //滑动窗口
-                    CacheHelper.SetCache(userid,LoginUser,DateTime.Now.AddMinutes(20));
-                }else
-                {
+                if (filterContext.HttpContext.Request.Cookies["userid"] == null) {
                     filterContext.HttpContext.Response.Redirect("/Login/Index");
                 }
+                else
+                {
+                    string userid = filterContext.HttpContext.Request.Cookies["userid"].Value.ToString();
+                    var s = CacheHelper.GetCache("userid");
+                    if (CacheHelper.GetCache(userid) != null)
+                    {
+                        LoginUser = (UserInfo)CacheHelper.GetCache(filterContext.HttpContext.Request.Cookies["userid"].Value);
+                        //滑动窗口
+                        CacheHelper.SetCache(userid, LoginUser, DateTime.Now.AddMinutes(20));
+                    }
+                    else
+                    {
+                        filterContext.HttpContext.Response.Redirect("/Login/Index");
+                    }
+                }
+                
             }
         }
     }

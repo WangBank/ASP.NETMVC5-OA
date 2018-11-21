@@ -56,7 +56,7 @@ namespace UI.Controllers
             string userid = Guid.NewGuid().ToString();
             Response.Cookies["userid"].Value = userid;
             //将用户信息存储到memcached中，var s 测试用
-            var s = CacheHelper.AddCache(userid, userinfo, DateTime.Now.AddMinutes(20));
+            CacheHelper.AddCache(userid, userinfo, DateTime.Now.AddMinutes(20));
             //将key存到cookies中
 
             // Session["LoginUser"] = userinfo;
