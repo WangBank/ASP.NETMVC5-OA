@@ -527,6 +527,7 @@
     <Content Include="Content\ligerui\Source\lib\images\7_7.jpg" />
     <Content Include="Content\ligerui\Source\lib\images\Alien Folder.png" />
     <Content Include="Content\ligerui\Source\lib\images\applebg.jpg" />
+    <Content Include="Content\ligerui\Source\lib\images\background.jpg" />
     <Content Include="Content\ligerui\Source\lib\images\bg.jpg" />
     <Content Include="Content\ligerui\Source\lib\images\bg.png" />
     <Content Include="Content\ligerui\Source\lib\images\bg3.png" />

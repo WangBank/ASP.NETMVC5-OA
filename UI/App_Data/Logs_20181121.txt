@@ -191,3 +191,124 @@ System.IO.IOException: SerializationException thrown while trying to deserialize
    --- 内部异常堆栈跟踪的结尾 ---
    在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
    在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-11-21 14:56:50,749 [48] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 14:56:50,818 [48] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 14:56:50,983 [48] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 15:03:27,606 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 15:03:28,313 [6] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 15:03:29,104 [6] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 16:30:59,251 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:30:59,329 [6] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 16:30:59,532 [6] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 16:31:00,597 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:32:13,018 [5] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:33:03,750 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:34:26,995 [6] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:35:53,773 [34] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:36:50,107 [34] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:40:38,929 [35] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:48:54,365 [18] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:48:54,425 [18] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 16:48:54,644 [18] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 16:48:55,695 [18] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:48:55,703 [18] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: 85e4b2e5-86b7-4fd4-abbf-013271b8a744
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-11-21 16:48:55,712 [18] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: 85e4b2e5-86b7-4fd4-abbf-013271b8a744
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: 85e4b2e5-86b7-4fd4-abbf-013271b8a744 ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-11-21 16:58:47,837 [40] ERROR Memcached.Client.SockIOPool - Failed to get SockIO obj for: 192.168.5.2:11211 -- new socket is not connected
+System.IO.IOException: 发生 I/O 错误。
+   在 Memcached.Client.SockIO.GetSocket(String host, Int32 port, Int32 timeout)
+   在 Memcached.Client.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay)
+   在 Memcached.Client.SockIOPool.CreateSocket(String host)
+2018-11-21 16:58:47,859 [40] ERROR Memcached.Client.SockIOPool - Failed to create connection to: 192.168.5.2:11211 -- only 0 created
+2018-11-21 16:58:48,046 [40] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-11-21 16:58:48,058 [40] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: d16330fa-2cb2-4e4a-b00e-3f40fb756b4c
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-11-21 16:58:48,070 [40] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: d16330fa-2cb2-4e4a-b00e-3f40fb756b4c
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: d16330fa-2cb2-4e4a-b00e-3f40fb756b4c ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
