@@ -7,7 +7,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    //[LoginCheckFilter(IsCheck = false)] 测试用
+    [LoginCheckFilter(IsCheck = false)] 
     public class HomeController : Controller
     {
         public ActionResult Index()

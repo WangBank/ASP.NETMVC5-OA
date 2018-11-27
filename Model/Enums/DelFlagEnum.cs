@@ -8,7 +8,7 @@ namespace Model.Enums
 {
     public enum DelFlagEnum
     {
-        Normal = 0,
-        Deleted = 1
+        Normal = 0,//正常
+        Deleted = 1//删除标记
     }
 }

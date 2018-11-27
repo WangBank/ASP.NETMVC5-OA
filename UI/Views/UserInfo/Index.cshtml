@@ -1,77 +1,150 @@
 ﻿@model IEnumerable<Model.UserInfo>
-
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-</head> 
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/locale/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery.easyui-1.4.5.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    @*初始化表格*@
+    <script type="text/javascript">
+        $(function () {
+            initTable();
+            //表单初始为隐藏
+            $("#addDiaLogDiv").css("display", "none");
+        })
+
+        //初始化用户信息表格
+        function initTable() {
+            $('#tt').datagrid({
+                url: '/UserInfo/GetAll',
+                title: '用户信息列表',
+                width: 700,
+                height: 400,
+                idField: 'ID',
+                loadMsg: '正在加载用户信息。。。。',
+                pagination: true,
+                singleSelect: false,
+                pagesize: 10,
+                pagenumber: 1,
+                pagelist: [10, 20, 30],
+                queryparams: {},
+                columns: [[
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '用户编号', width: 80 },
+                    { field: 'UserName', title: '用户名', align: 'left', width: 120 },
+                    { field: 'Remark', title: '备注', align: 'left', width: 120 },
+                    { field: 'Pwd', title: '密码', align: 'left', width: 120 },
+                    {
+                        field: 'SubTime', title: '提交时间', align: 'left', width: 80, align: 'right', formatter: function (value) {
+                            var date = new Date(parseInt(value.replace("/Date(", "").replace(")/", ""), 10));
+                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                        }
+                    }
+
+                ]],
+                //页面的上按钮
+                toolbar: [{
+                    id: 'btnDownShelf',
+                    text: '添加用户',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        //alert("oo");
+                        //弹出对话框
+                        addClickEvent();
+                    }
+                }],
+                onHeaderContextMenu: function (e, field) {
+
+                }
+            });
+
+            //当用户点添加，弹出对话框
+            function addClickEvent() {
+                $("#addDiaLogDiv").css("display", "block");
+                $("#addDiaLogDiv").dialog({
+                    title: '添加用户',
+                    modal: true,
+                    width: 400,
+                    height: 400,
+                    collapsible: true,
+                    minimizable: true,
+                    maximizable: true,
+                    resizable: true,
+                    //页面按钮
+                    buttons: [
+                        {
+                            id: 'btnOK',
+                            text: '添加',
+                            iconCls: 'icon-ok',
+                            handler: subAddForm
+                        },
+
+                        {
+                             id: 'btnCancel',
+                             text: '取消',
+                             iconCls: 'icon-cancel',
+                             handler: function () {
+                                 $("#addDiaLogDiv").dialog("close");
+                             }
+                         }
+                    ]
+                });
+            }
+        }
+
+        //把表单提交到后台
+        function subAddForm() {
+            $("#addDiaLogDiv form").submit();
+        }
+
+        function afterAdd(data) {
+            if (data == "ok!") {
+                //关闭对话框并刷新表格
+                $("#addDiaLogDiv").dialog("close");
+                initTable();
+            } else {
+                $.messager.alert(data);
+            }
+        }
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        }
+    </script>
+
+</head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UPwd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DelFlag)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remark)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sort)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UPwd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DelFlag)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remark)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sort)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    <table id="tt" style="width:700px;" title="标题，可以用代码" iconcls="icon-edit"></table>
+    <div id="addDiaLogDiv">
+                @using (Ajax.BeginForm("Create", "UserInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
+                {<table>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="UName" /></td>
+            </tr>
+            <tr>
+                <td>备注：</td>
+                <td><input type="text" name="Remark" /></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="text" name="UPwd" /></td>
+            </tr>
+        </table>
+                }
+
+</div>
 </body>
 </html>

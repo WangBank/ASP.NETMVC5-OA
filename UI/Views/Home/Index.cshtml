@@ -103,31 +103,24 @@
             height: 22px;
         }
     </style>
-    <script type="text/javascript">
-        $(function () {
-
-            $("#layout1").ligerLayout();
-        });
-
-    </script>
 
 </head>
 
-<body style="overflow: hidden; background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
+<body style="overflow: hidden;background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
     
     @*<div position="top" style="height:80px;">
     </div>*@ 
     <div id="layout1"> 
-
+        <div position="top">
+            <h1>王银行的OA</h1>
+        </div>
         <div position="center"   style="overflow: hidden; background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
             <div id="winlinks">
                 <ul></ul>
             </div>
         </div>
 
-        <div position="top">
-           <h1>王银行的OA</h1>
-        </div>
+
 
     </div>
 
@@ -139,7 +132,7 @@
     //点击图标的时候,打开对话框
     function f_open(url, title, icon) {
         var win = $.ligerDialog.open(
-        { height: 500, url: url, width: 600, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title, slide: false, buttons: [
+        { height: 500, url: url, width: 730, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title, slide: false, buttons: [
             { text: '确定', onclick: function (item, Dialog, index) {
                 win.hide();
             }
@@ -153,7 +146,7 @@
         return win;
     }
     var links = [
-
+            { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '用户列表', url: '/UserInfo/Index' },
             { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '填写周报', url: '/Content/ligerui/Source/demos/case/week.htm' },
             { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: 'treegrid', url: '/Content/ligerui/Source/demos/grid/treegrid/treegrid.htm' },
             { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '多表头', url: '/Content/ligerui/Source/demos/grid/mulheader/grid2.htm' },
@@ -215,4 +208,13 @@
     onResize();
 
 </script>
+<script type="text/javascript">
+        $(function () {
+
+            $("#layout1").ligerLayout();
+        });
+
+
+</script>
+
 </html>
