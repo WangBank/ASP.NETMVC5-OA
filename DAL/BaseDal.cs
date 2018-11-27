@@ -74,5 +74,12 @@ namespace DAL
             //return Db.SaveChanges() > 0;
             return true;
         }
+
+        public bool Delete(int id)
+        {
+            var entity = Db.Set<T>().Find(id);
+            Db.Set<T>().Remove(entity);
+            return true;
+        }
     }
 }

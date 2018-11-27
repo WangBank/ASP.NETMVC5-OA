@@ -1,6 +1,7 @@
 ﻿using IBLL;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using UI.Models;
@@ -10,13 +11,13 @@ namespace UI.Controllers
     [LoginCheckFilter(IsCheck = false)]
     public class UserInfoController : Controller
     {
-       public IUserInfoService u { get; set; }
+        public IUserInfoService u { get; set; }
         // GET: UserInfo
         //显示详情页
         public ActionResult Index()
         {
             //throw new Exception("ddddddd");
-            ViewData.Model = u.GetEntities(u=>true);
+            ViewData.Model = u.GetEntities(u => true);
             return View();
         }
 
@@ -37,15 +38,16 @@ namespace UI.Controllers
 
             short delflag = (short)Model.Enums.DelFlagEnum.Normal;
             //拿到当前页的数据
-            var pageData = u.GetPageEntities(pagesize, pageindex, out total, u => u.DelFlag == delflag, u => u.ID, true).Select(u=>new {
+            var pageData = u.GetPageEntities(pagesize, pageindex, out total, u => u.DelFlag == delflag, u => u.ID, true).Select(u => new
+            {
                 ID = u.ID,
-                UserName =u.UName,
+                UserName = u.UName,
                 Remark = u.Remark,
                 Pwd = u.UPwd,
                 SubTime = u.SubTime,
             });
 
-            var data = new { total = total, rows = pageData.ToList()};
+            var data = new { total = total, rows = pageData.ToList() };
 
             //有导航属性的时候，使用微软默认序列化会有问题
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -100,25 +102,36 @@ namespace UI.Controllers
         }
 
         // GET: UserInfo/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string ids)
         {
-            return View();
+            if (string.IsNullOrEmpty(ids))
+            {
+                return Content("请选择数据");
+            }
+            List<int> idist = new List<int>();
+            string[] idss = ids.Split(',');
+            foreach (var id in idss)
+            {
+                idist.Add(int.Parse(id));
+            }
+            u.DeleteList(idist);
+            return Content("ok");
         }
 
         // POST: UserInfo/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

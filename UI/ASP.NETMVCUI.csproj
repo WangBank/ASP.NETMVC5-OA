@@ -1181,6 +1181,7 @@
     <Content Include="Content\ligerui\Source\demos\tree\treeData2.ashx" />
     <Content Include="Content\ligerui\Source\lib\ligerUI\skins\icons\新建 Microsoft Office Excel 工作表.xlsx" />
     <Content Include="Content\themes\material\images\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\a.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\easyloader.js" />

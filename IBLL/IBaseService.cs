@@ -38,5 +38,9 @@ namespace IBLL
        T Edit(T u);
 
         bool Delete(T u);
+
+        int DeleteList(List<int> ids);
+
+        bool Delete(int id);
     }
 }

@@ -72,5 +72,31 @@ namespace BLL
             CurrentDal.Delete(t);
             return DbSession.SaveChanges()>0;
         }
+        
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int DeleteList(List<int> ids)
+        {
+            foreach (var id in ids)
+            {
+                CurrentDal.Delete(id);
+            }
+            return DbSession.SaveChanges();
+        
+        }
+
+        /// <summary>
+        /// 根据id删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            CurrentDal.Delete(id);
+            return DbSession.SaveChanges() > 0;
+        }
     }
 }

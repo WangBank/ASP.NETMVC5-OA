@@ -28,5 +28,12 @@ namespace IDAL
         T Edit(T u);
 
         bool Delete(T u);
+
+        /// <summary>
+        /// 加一个约束
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool Delete(int id);
     }
 }

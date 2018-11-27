@@ -17,5 +17,7 @@ namespace BLL
         //{
         //    CurrentDal = this.DbSession.userInfoDal;
         //}
+
+        
     }
 }
