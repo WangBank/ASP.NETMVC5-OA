@@ -20,13 +20,19 @@
             //表单初始为隐藏
             $("#addDiaLogDiv").css("display", "none");
             $("#editDiaLogDiv").css("display", "none");
+            bindSearchBtnClick();
+        });
 
-        })
-
+        function bindSearchBtnClick() {
+            $("#btnSearch").click(function () {
+                var data = { searchName: $("#txtsName").val(), searchRemark: $("#txtSchRemark").val() };
+                initTable(data);
+            });
+        }
         //初始化用户信息表格
-        function initTable() {
+        function initTable(queryParams) {
             $('#tt').datagrid({
-                url: '/UserInfo/GetAll',
+                url: '/UserInfo/GetAll',//rows page 默认发送的两个数据
                 title: '用户信息列表',
                 width: 700,
                 height: 400,
@@ -37,9 +43,7 @@
                 pagesize: 10,
                 pagenumber: 1,
                 pagelist: [10, 20, 30],
-                queryparams: {},
-
-                //表格所含内容
+                queryParams: queryParams,//让表格加载数据的时候额外传输的数据
                 columns: [[
                     { field: 'ck', checkbox: true, align: 'left', width: 50 },
                     { field: 'ID', title: '用户编号', width: 80 },
@@ -238,6 +242,10 @@
 
 </head>
 <body>
+    <div>
+        用户名:<input type="text" name="txtSchName" id="txtsName"/> 备注:<input type="text" name="txtsRemark"  id="txtSchRemark"/> <input id="btnSearch" type="button" value="搜索" />
+    </div>
+
     <table id="tt" style="width:700px;" title="标题，可以用代码" iconcls="icon-edit"></table>
     @* 添加用户信息div开始 *@
     <div id="addDiaLogDiv">
@@ -264,22 +272,6 @@
     @* 修改用户信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
     <div id="editDiaLogDiv">
         <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes" ></iframe>
-        @*@using (Ajax.BeginForm("Edit", "UserInfo", new AjaxOptions() { OnSuccess = "afterEdit" }))
-        {<table>
-                <tr>
-                    <td>用户名：</td>
-                    <td><input type="text" name="UName" /></td>
-                </tr>
-                <tr>
-                    <td>备注：</td>
-                    <td><input type="text" name="Remark" /></td>
-                </tr>
-                <tr>
-                    <td>密码：</td>
-                    <td><input type="text" name="UPwd" /></td>
-                </tr>
-            </table>
-        }*@
     </div>
     @* 修改用户信息div结束 *@
 

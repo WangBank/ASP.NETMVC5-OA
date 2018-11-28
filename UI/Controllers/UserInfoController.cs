@@ -1,5 +1,6 @@
 ﻿using IBLL;
 using Model;
+using Model.Params;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +38,24 @@ namespace UI.Controllers
             int pageindex = int.Parse(Request["page"] ?? "1");
             int total = 0;
 
+            //过滤的用户名和过滤的备注
+            //{ searchName: $("#txtsName").val(), searchRemark: $("#txtSchRemark").val() };
+            string schName = Request["searchName"];
+            string schRemark = Request["searchRemark"];
+
             short delflag = (short)Model.Enums.DelFlagEnum.Normal;
             //拿到当前页的数据
-            var pageData = u.GetPageEntities(pagesize, pageindex, out total, u => u.DelFlag == delflag, u => u.ID, true).Select(u => new
+            var param = new UserQueryParam()
+            {
+                PageIndex = pageindex,
+                PageSize = pagesize,
+                SchName = schName,
+                SchRemark = schRemark,
+                Total = 0
+            };
+           var pageData =  u.LoadPageData(param);
+
+            var temp = pageData.Select(u => new
             {
                 ID = u.ID,
                 UserName = u.UName,
@@ -47,8 +63,20 @@ namespace UI.Controllers
                 Pwd = u.UPwd,
                 SubTime = u.SubTime,
             });
+            //var pageData = u.GetPageEntities(
+            //    pagesize, pageindex, out total, 
+            //    u => u.DelFlag == delflag, 
+            //    u => u.ID, true).Select(
+            //    u => new
+            //{
+            //    ID = u.ID,
+            //    UserName = u.UName,
+            //    Remark = u.Remark,
+            //    Pwd = u.UPwd,
+            //    SubTime = u.SubTime,
+            //});
 
-            var data = new { total = total, rows = pageData.ToList() };
+            var data = new { total = param.Total, rows = temp.ToList() };
 
             //有导航属性的时候，使用微软默认序列化会有问题
             return Json(data, JsonRequestBehavior.AllowGet);

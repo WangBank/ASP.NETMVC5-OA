@@ -9,5 +9,7 @@ namespace IBLL
 {
     public partial interface IUserInfoService:IBaseService<UserInfo>
     {
+        //多条件查询
+        IQueryable<UserInfo> LoadPageData(Model.Params.UserQueryParam userQueryParam);
     }
 }
