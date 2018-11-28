@@ -42,5 +42,7 @@ namespace IBLL
         int DeleteList(List<int> ids);
 
         bool Delete(int id);
+
+        int DeleteListByLogical(List<int> ids);
     }
 }

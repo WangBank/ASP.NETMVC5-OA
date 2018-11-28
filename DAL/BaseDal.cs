@@ -75,11 +75,33 @@ namespace DAL
             return true;
         }
 
+        /// <summary>
+        /// 直接删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
             var entity = Db.Set<T>().Find(id);
             Db.Set<T>().Remove(entity);
             return true;
+        }
+        
+        /// <summary>
+        /// 修改删除标志
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int DeleteListByLogical(List<int> ids)
+        {
+            
+            foreach (var id in ids)
+            {
+                var entity = Db.Set<T>().Find(id);
+                Db.Entry(entity).Property("DelFlag").CurrentValue = (short)Model.Enums.DelFlagEnum.Deleted;
+                Db.Entry(entity).Property("DelFlag").IsModified = true;
+            }
+            return ids.Count;
         }
     }
 }

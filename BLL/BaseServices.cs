@@ -74,18 +74,25 @@ namespace BLL
         }
         
         /// <summary>
-        /// 批量删除
+        /// 批量删除，直接删除
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
         public int DeleteList(List<int> ids)
         {
+            //真删除从数据库表中
             foreach (var id in ids)
             {
                 CurrentDal.Delete(id);
             }
             return DbSession.SaveChanges();
         
+        }
+
+        public int DeleteListByLogical(List<int > ids)
+        {
+           CurrentDal.DeleteListByLogical(ids);
+            return DbSession.SaveChanges();
         }
 
         /// <summary>

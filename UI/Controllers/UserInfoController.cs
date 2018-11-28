@@ -12,6 +12,7 @@ namespace UI.Controllers
     public class UserInfoController : Controller
     {
         public IUserInfoService u { get; set; }
+        
         // GET: UserInfo
         //显示详情页
         public ActionResult Index()
@@ -79,21 +80,23 @@ namespace UI.Controllers
         //    }
         //}
 
-        // GET: UserInfo/Edit/5
+
+        // GET: UserInfo/Edit/5 修改数据
         public ActionResult Edit(int id)
         {
+            ViewData.Model = u.GetEntities(u =>u.ID==id).FirstOrDefault();
             return View();
         }
 
         // POST: UserInfo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(UserInfo info)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                u.Edit(info);
+                return Content("ok"); ;
             }
             catch
             {
@@ -102,6 +105,12 @@ namespace UI.Controllers
         }
 
         // GET: UserInfo/Delete/5
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         public ActionResult Delete(string ids)
         {
             if (string.IsNullOrEmpty(ids))
@@ -114,8 +123,8 @@ namespace UI.Controllers
             {
                 idist.Add(int.Parse(id));
             }
-            u.DeleteList(idist);
-            return Content("ok");
+            u.DeleteListByLogical(idist);
+            return Content("ok!");
         }
 
         // POST: UserInfo/Delete/5

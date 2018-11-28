@@ -19,6 +19,8 @@
             initTable();
             //表单初始为隐藏
             $("#addDiaLogDiv").css("display", "none");
+            $("#editDiaLogDiv").css("display", "none");
+
         })
 
         //初始化用户信息表格
@@ -36,6 +38,8 @@
                 pagenumber: 1,
                 pagelist: [10, 20, 30],
                 queryparams: {},
+
+                //表格所含内容
                 columns: [[
                     { field: 'ck', checkbox: true, align: 'left', width: 50 },
                     { field: 'ID', title: '用户编号', width: 80 },
@@ -53,17 +57,30 @@
                     }
 
                 ]],
+
                 //用户信息页面上的按钮
                 toolbar: [
+
+                 //用户信息页面，添加按钮
                     {id: 'btnDownShelf',
                     text: '添加用户',
                     iconCls: 'icon-add',
                     handler: function () {
-                        //alert("oo");
                         //弹出对话框
                         addClickEvent();
                     }
                     },
+
+                     //用户信息页面，修改按钮
+                     { id: 'btnEdit',
+                         text: '修改用户',
+                         iconCls: 'icon-edit',
+                         handler: function () {
+                             editClickEvent();
+                         }
+                     },
+
+                      //用户信息页面，删除按钮
                      {id: 'btnDelete',
                     text: '删除用户',
                     iconCls: 'icon-cancel',
@@ -75,16 +92,93 @@
 
                 }
             });
+        }
 
-            //当用户点击删除按钮时发生事件
-            function deleteEvent() {
+        //当用户点添加，弹出对话框
+        function addClickEvent() {
+            $("#addDiaLogDiv").css("display", "block");
+            $("#addDiaLogDiv").dialog({
+                title: '添加用户信息',
+                modal: true,
+                width: 400,
+                height: 400,
+                collapsible: true,
+                minimizable: true,
+                maximizable: true,
+                resizable: true,
+                //页面按钮
+                buttons: [
+                    {
+                        id: 'btnOK',
+                        text: '添加',
+                        iconCls: 'icon-ok',
+                        handler: subAddForm
+                    },
+
+                    {
+                        id: 'btnCancel',
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $("#addDiaLogDiv").dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+
+        //当用户点击修改按钮发生事件
+        function editClickEvent() {
+            //校验是否选中一个用户信息
+            var selections = $('#tt').datagrid("getSelections");
+            if (selections.length != 1) {
+                $.messager.alert("错误提醒", "请选择一行要删除的信息", "question");
+                return;
+            }
+            //给editFrame的src属性赋值
+            $("#editframe").attr("src", "/UserInfo/Edit/" + selections[0].ID);
+
+            $("#editDiaLogDiv").css("display", "block");
+            $("#editDiaLogDiv").dialog({
+                title: '修改用户信息',
+                modal: true,
+                width: 400,
+                height: 400,
+                collapsible: true,
+                minimizable: true,
+                maximizable: true,
+                resizable: true,
+                //页面按钮
+                buttons: [
+                    {
+                        id: 'btnOK',
+                        text: '确认修改',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            $("#editframe")[0].contentWindow.submitForm();
+                        }
+                    },
+
+                    {
+                        id: 'btnCancel',
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $("#editDiaLogDiv").dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+
+        //当用户点击删除按钮时发生事件
+        function deleteEvent() {
                 //拿到选中的项，api
                 var selections = $('#tt').datagrid("getSelections");
                 if (selections.length <= 0) {
-                    $.messager.alert("错误提醒","请选择要删除的信息","question");
+                    $.messager.alert("错误提醒", "请选择要删除的信息", "question");
                     return;
                 }
-                var ids = "";
                 //删除所选择的数据
                 for (var key in selections) {
                     ids = ids + selections[key].ID + ",";
@@ -99,49 +193,22 @@
                         initTable();
                     } else {
                         //如果删除失败的话提示删除失败
-                        $.messager.alert("删除失败","失败了","error");
+                        $.messager.alert("删除失败", "失败了", "error");
                     }
                 });
             }
-            //当用户点添加，弹出对话框
-            function addClickEvent() {
-                $("#addDiaLogDiv").css("display", "block");
-                $("#addDiaLogDiv").dialog({
-                    title: '添加用户',
-                    modal: true,
-                    width: 400,
-                    height: 400,
-                    collapsible: true,
-                    minimizable: true,
-                    maximizable: true,
-                    resizable: true,
-                    //页面按钮
-                    buttons: [
-                        {
-                            id: 'btnOK',
-                            text: '添加',
-                            iconCls: 'icon-ok',
-                            handler: subAddForm
-                        },
 
-                        {
-                             id: 'btnCancel',
-                             text: '取消',
-                             iconCls: 'icon-cancel',
-                             handler: function () {
-                                 $("#addDiaLogDiv").dialog("close");
-                             }
-                         }
-                    ]
-                });
-            }
-        }
-
-        //把表单提交到后台
+        //把增加表单提交到后台
         function subAddForm() {
             $("#addDiaLogDiv form").submit();
         }
 
+        ////把修改表单提交到后台
+        //function subEditForm() {
+        //    $("#editDiaLogDiv form").submit();
+        //}
+
+        //添加成功的回调事件
         function afterAdd(data) {
             if (data == "ok!") {
                 //关闭对话框并刷新表格
@@ -151,17 +218,28 @@
                 $.messager.alert(data);
             }
         }
+
+        //修改成功的回调事件
+        function afterEdit(data) {
+                //关闭对话框并刷新表格
+                $("#editDiaLogDiv").dialog("close");
+                initTable();
+        }
+
+        //将json时间转化为string
         function ChangeDateFormat(cellval) {
             var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
             var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
             var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
             return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         }
+
     </script>
 
 </head>
 <body>
     <table id="tt" style="width:700px;" title="标题，可以用代码" iconcls="icon-edit"></table>
+    @* 添加用户信息div开始 *@
     <div id="addDiaLogDiv">
                 @using (Ajax.BeginForm("Create", "UserInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
                 {<table>
@@ -181,5 +259,29 @@
                 }
 
 </div>
+    @* 添加用户信息div结束 *@
+
+    @* 修改用户信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
+    <div id="editDiaLogDiv">
+        <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes" ></iframe>
+        @*@using (Ajax.BeginForm("Edit", "UserInfo", new AjaxOptions() { OnSuccess = "afterEdit" }))
+        {<table>
+                <tr>
+                    <td>用户名：</td>
+                    <td><input type="text" name="UName" /></td>
+                </tr>
+                <tr>
+                    <td>备注：</td>
+                    <td><input type="text" name="Remark" /></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><input type="text" name="UPwd" /></td>
+                </tr>
+            </table>
+        }*@
+    </div>
+    @* 修改用户信息div结束 *@
+
 </body>
 </html>

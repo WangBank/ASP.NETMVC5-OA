@@ -35,5 +35,7 @@ namespace IDAL
         /// <param name="id"></param>
         /// <returns></returns>
         bool Delete(int id);
+
+        int DeleteListByLogical(List<int> ids);
     }
 }
