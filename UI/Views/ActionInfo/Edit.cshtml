@@ -1,0 +1,119 @@
+﻿@model Model.ActionInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>>
+    <script type="text/javascript">
+        //回调方法
+        function afterEdit(data) {
+            if (data == "ok") {
+                //调用父容器的方法刷新
+                window.parent.window.afterEdit();
+            } else {
+                alert("修改失败");
+            }
+        }
+
+        //提交按钮
+        function submitForm() {
+            $("form").submit();
+        }
+    </script>
+    <title>Edit</title>
+</head>
+<body>
+    @using (Ajax.BeginForm(new AjaxOptions()
+    {
+        OnSuccess = "afterEdit"
+    })) { 
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>ActionInfo</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.SubTime)
+            @Html.HiddenFor(model => model.DelFlag)
+            @Html.HiddenFor(model => model.ModifiedOn)
+            @Html.HiddenFor(model => model.IconWidth)
+            @Html.HiddenFor(model => model.ActionMethodName)
+            @Html.HiddenFor(model => model.IconHeight)
+            @Html.HiddenFor(model => model.ControllerName)
+            @Html.HiddenFor(model => model.ActionTypeEnum)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ActionInfoName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ActionInfoName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ActionInfoName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sort, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Sort, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Sort, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HttpMethod, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HttpMethod, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HttpMethod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenuIcon, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenuIcon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MenuIcon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsMenu, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsMenu)
+                        @Html.ValidationMessageFor(model => model.IsMenu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

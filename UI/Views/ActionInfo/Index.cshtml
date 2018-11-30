@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Model.UserInfo>
+﻿@model IEnumerable<Model.ActionInfo>
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,7 @@
     <script src="~/Scripts/locale/easyui-lang-zh_CN.js"></script>
     <script src="~/Scripts/jquery.easyui-1.4.5.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
     @*初始化表格*@
     <script type="text/javascript">
         $(function () {
@@ -20,24 +22,34 @@
             //表单初始为隐藏
             $("#addDiaLogDiv").css("display", "none");
             $("#editDiaLogDiv").css("display", "none");
+            $("#conUrl").css("display", "none");
+            //搜索传参
             bindSearchBtnClick();
+            //是否是菜单绑定事件
+            bindIsMenuClick();
         });
-
+        
+        function bindIsMenuClick() {
+            $("#IsMenu").change(function () {
+                //显示或者隐藏图标地址
+                $("#conUrl").toggle();
+            });
+        }
         function bindSearchBtnClick() {
             $("#btnSearch").click(function () {
                 var data = { searchName: $("#txtsName").val(), searchRemark: $("#txtSchRemark").val() };
                 initTable(data);
             });
         }
-        //初始化用户信息表格
+        //初始化权限信息表格
         function initTable(queryParams) {
             $('#tt').datagrid({
-                url: '/UserInfo/GetAll',//rows page 默认发送的两个数据
-                title: '用户信息列表',
-                width: 700,
-                height: 400,
+                url: '/ActionInfo/GetAllActionInfo',//rows page 默认发送的两个数据
+                title: '权限信息列表',
+                width: 1200,
+                height: 500,
                 idField: 'ID',
-                loadMsg: '正在加载用户信息。。。。',
+                loadMsg: '正在加载权限信息。。。。',
                 pagination: true,
                 singleSelect: false,
                 pagesize: 10,
@@ -45,11 +57,33 @@
                 pagelist: [10, 20, 30],
                 queryParams: queryParams,//让表格加载数据的时候额外传输的数据
                 columns: [[
+                //    a.ID,
+                //a.IsMenu,
+                //a.Url,
+                //a.Remark,
+                //a.Sort,
+                //a.SubTime,
+                //a.ModifiedOn,
+                //a.HttpMethod,
+                //a.ActionInfoName,
+                //a.MenuIcon
                     { field: 'ck', checkbox: true, align: 'left', width: 50 },
-                    { field: 'ID', title: '用户编号', width: 80 },
-                    { field: 'UserName', title: '用户名', align: 'left', width: 120 },
+                    { field: 'ID', title: '权限编号', width: 80 },
+                    { field: 'ActionInfoName', title: '权限名称', align: 'left', width: 120 },
+                    { field: 'HttpMethod', title: 'Http方法类型', align: 'left', width: 120 },
+                    { field: 'Url', title: 'Url', align: 'left', width: 120 },
+                    {
+                        field: 'IsMenu', title: '是否是菜单项', align: 'left', width: 120, formatter: function (value) {
+                            return value ? "是" : "否";
+                        }
+                    },
+                    { field: 'Sort', title: '排序', align: 'left', width: 120 },
                     { field: 'Remark', title: '备注', align: 'left', width: 120 },
-                    { field: 'Pwd', title: '密码', align: 'left', width: 120 },
+                    {
+                        field: 'MenuIcon', title: '图标', align: 'left', width: 120, formatter: function (value) {
+                            return "<img src = '" + value + "'width ='20px' heigth='20px'/>";
+                        }
+                    },
                     {
                         field: 'SubTime', title: '提交时间', align: 'left', width: 110, align: 'right', formatter: function (value) {
                             var date = new Date(parseInt(value.replace("/Date(", "").replace(")/", ""), 10));
@@ -62,12 +96,12 @@
 
                 ]],
 
-                //用户信息页面上的按钮
+                //权限信息页面上的按钮
                 toolbar: [
 
-                 //用户信息页面，添加按钮
+                 //权限信息页面，添加按钮
                     {id: 'btnDownShelf',
-                    text: '添加用户',
+                    text: '添加权限',
                     iconCls: 'icon-add',
                     handler: function () {
                         //弹出对话框
@@ -75,18 +109,18 @@
                     }
                     },
 
-                     //用户信息页面，修改按钮
+                     //权限信息页面，修改按钮
                      { id: 'btnEdit',
-                         text: '修改用户',
+                         text: '修改权限',
                          iconCls: 'icon-edit',
                          handler: function () {
                              editClickEvent();
                          }
                      },
 
-                      //用户信息页面，删除按钮
+                      //权限信息页面，删除按钮
                      {id: 'btnDelete',
-                    text: '删除用户',
+                    text: '删除权限',
                     iconCls: 'icon-cancel',
                     handler: function () {
                         deleteEvent();
@@ -98,11 +132,11 @@
             });
         }
 
-        //当用户点添加，弹出对话框
+        //当权限点添加，弹出对话框
         function addClickEvent() {
             $("#addDiaLogDiv").css("display", "block");
             $("#addDiaLogDiv").dialog({
-                title: '添加用户信息',
+                title: '添加权限信息',
                 modal: true,
                 width: 400,
                 height: 400,
@@ -131,20 +165,20 @@
             });
         }
 
-        //当用户点击修改按钮发生事件
+        //当权限点击修改按钮发生事件
         function editClickEvent() {
-            //校验是否选中一个用户信息
+            //校验是否选中一个权限信息
             var selections = $('#tt').datagrid("getSelections");
             if (selections.length != 1) {
                 $.messager.alert("错误提醒", "请选择一行要删除的信息", "question");
                 return;
             }
             //给editFrame的src属性赋值
-            $("#editframe").attr("src", "/UserInfo/Edit/" + selections[0].ID);
+            $("#editframe").attr("src", "/ActionInfo/Edit/" + selections[0].ID);
 
             $("#editDiaLogDiv").css("display", "block");
             $("#editDiaLogDiv").dialog({
-                title: '修改用户信息',
+                title: '修改权限信息',
                 modal: true,
                 width: 400,
                 height: 400,
@@ -175,7 +209,7 @@
             });
         }
 
-        //当用户点击删除按钮时发生事件
+        //当权限点击删除按钮时发生事件
         function deleteEvent() {
                 //拿到选中的项，api
                 var selections = $('#tt').datagrid("getSelections");
@@ -192,7 +226,7 @@
                 ids = ids.substr(0, ids.length - 1);
                 //alert(ids);
                 //当删除成功的时候，刷新页面
-                $.post("/UserInfo/Delete", { ids: ids }, function (data) {
+                $.post("/ActionInfo/Delete", { ids: ids }, function (data) {
                     if (data == "ok") {
                         //刷新表格
                         initTable();
@@ -243,38 +277,62 @@
 
 </head>
 <body>
+    @*搜索栏*@
     <div>
-        用户名:<input type="text" name="txtSchName" id="txtsName"/> 备注:<input type="text" name="txtsRemark"  id="txtSchRemark"/> <input id="btnSearch" type="button" value="搜索" />
+        权限名:<input type="text" name="txtSchName" id="txtsName" /> 备注:<input type="text" name="txtsRemark" id="txtSchRemark" /> <input id="btnSearch" type="button" value="搜索" />
     </div>
 
     <table id="tt" style="width:700px;" title="标题，可以用代码" iconcls="icon-edit"></table>
-    @* 添加用户信息div开始 *@
+    @* 添加权限信息div开始 *@
     <div id="addDiaLogDiv">
-                @using (Ajax.BeginForm("Create", "UserInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
-                {<table>
+        @using (Ajax.BeginForm("Create", "ActionInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
+        {<table>
             <tr>
-                <td>用户名：</td>
-                <td><input type="text" name="UName" /></td>
+                <td>权限名：</td>
+                <td><input type="text" name="ActionInfoName" /></td>
             </tr>
+             <tr>
+                 <td>Url：</td>
+                 <td><input type="text" name="Url" /></td>
+             </tr>            
             <tr>
-                <td>备注：</td>
-                <td><input type="text" name="Remark" /></td>
+                <td>Http方法类型：</td>
+                <td><select name="HttpMethod">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    </select><td/>
             </tr>
-            <tr>
-                <td>密码：</td>
-                <td><input type="text" name="UPwd" /></td>
-            </tr>
+             <tr>
+                 <td>是否是菜单项：</td>
+                 <td><input id="IsMenu" type="checkbox" name="IsMenu" value="true" /></td>
+             </tr>
+             <tr id="conUrl">
+                 <td>菜单的图标地址：</td>
+                 <td>
+                     <img src="/Content/ligerui/Source/lib/images/3DSMAX.png" width=20px heigth=20px />
+                 </td>
+             </tr>
+             <tr>
+                 <td>排序：</td>
+                 <td><input type="text" name="Sort" /></td>
+             </tr>
+             <tr>
+                 <td>备注：</td>
+                 <td><input type="text" name="Remark" /></td>
+             </tr>
         </table>
-                }
+        }
 
-</div>
-    @* 添加用户信息div结束 *@
-
-    @* 修改用户信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
-    <div id="editDiaLogDiv">
-        <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes" ></iframe>
     </div>
-    @* 修改用户信息div结束 *@
+    @* 添加权限信息div结束 *@
+
+    @* 修改权限信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
+    <div id="editDiaLogDiv">
+        <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
+    </div>
+    @* 修改权限信息div结束 *@
 
 </body>
 </html>
+
+

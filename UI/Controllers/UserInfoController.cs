@@ -9,7 +9,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    [LoginCheckFilter(IsCheck = false)]
+    //[LoginCheckFilter(IsCheck = false)],调试用
     public class UserInfoController : Controller
     {
         public IUserInfoService u { get; set; }
@@ -32,7 +32,6 @@ namespace UI.Controllers
         public ActionResult GetAll()
         {
             //jquery easyui:table {total:32,row:[{},{}]}
-
             //jquery：table在初始化的时候自动发送以下两个数据
             int pagesize = int.Parse(Request["rows"] ?? "10");
             int pageindex = int.Parse(Request["page"] ?? "1");
@@ -42,8 +41,8 @@ namespace UI.Controllers
             //{ searchName: $("#txtsName").val(), searchRemark: $("#txtSchRemark").val() };
             string schName = Request["searchName"];
             string schRemark = Request["searchRemark"];
+            //short delflag = (short)Model.Enums.DelFlagEnum.Normal;
 
-            short delflag = (short)Model.Enums.DelFlagEnum.Normal;
             //拿到当前页的数据
             var param = new UserQueryParam()
             {
@@ -51,7 +50,7 @@ namespace UI.Controllers
                 PageSize = pagesize,
                 SchName = schName,
                 SchRemark = schRemark,
-                Total = 0
+                Total = total
             };
            var pageData =  u.LoadPageData(param);
 

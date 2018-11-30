@@ -54,13 +54,11 @@ namespace UI.Controllers
             }
             //生成随机key
             string userid = Guid.NewGuid().ToString();
-            Response.Cookies["userid"].Value = userid;
-            //将用户信息存储到memcached中，var s 测试用
-            CacheHelper.AddCache(userid, userinfo, DateTime.Now.AddMinutes(20));
             //将key存到cookies中
-
+            Response.Cookies["userid"].Value = userid;
+            //将用户信息存储到memcached中
+            CacheHelper.AddCache(userid, userinfo, DateTime.Now.AddMinutes(20));
             // Session["LoginUser"] = userinfo;
-            //跳转到首页
             return Content("ok");
         }
 

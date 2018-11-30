@@ -4,4 +4,6 @@
   <object name="UserInfoService" type="BLL.UserInfoService, BLL" singleton="false" >
   </object>
 
+  <object name="ActionInfoService" type="BLL.ActionInfoService, BLL" singleton="false" >
+  </object>
 </objects>

@@ -260,6 +260,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActionInfoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -1202,6 +1203,7 @@
     <Content Include="Scripts\locale\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\locale\easyui-lang-zh_TW.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyAjaxForm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -1241,14 +1243,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserInfo\Index.cshtml" />
-    <Content Include="Views\UserInfo\Create.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\TreeIndex.cshtml" />
     <Content Include="Views\UserInfo\Edit.cshtml" />
+    <Content Include="Views\ActionInfo\Index.cshtml" />
+    <Content Include="Views\ActionInfo\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\login\" />
+    <Folder Include="UploadFiles\UploadImgs\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

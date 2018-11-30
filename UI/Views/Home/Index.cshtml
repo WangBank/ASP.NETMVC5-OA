@@ -107,22 +107,18 @@
 </head>
 
 <body style="overflow: hidden;background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
-    
-    @*<div position="top" style="height:80px;">
-    </div>*@ 
-    <div id="layout1"> 
+    layout
+
+    @*<div id="layout1"> 
         <div position="top">
             <h1>王银行的OA</h1>
-        </div>
+        </div>*@
         <div position="center"   style="overflow: hidden; background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
             <div id="winlinks">
                 <ul></ul>
             </div>
         </div>
-
-
-
-    </div>
+    @*</div>*@
 
 </body>
 <script type="text/javascript">
@@ -147,7 +143,7 @@
     }
     var links = [
             { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '用户列表', url: '/UserInfo/Index' },
-            { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '填写周报', url: '/Content/ligerui/Source/demos/case/week.htm' },
+            { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '权限管理', url: '/ActionInfo/Index' },
             { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: 'treegrid', url: '/Content/ligerui/Source/demos/grid/treegrid/treegrid.htm' },
             { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '多表头', url: '/Content/ligerui/Source/demos/grid/mulheader/grid2.htm' },
             { icon: '/Content/ligerui/Source/lib/images/Program Files Folder.png', title: '固定列', url: '/Content/ligerui/Source/demos/grid/frozen/frozengrid.htm' },
@@ -208,13 +204,13 @@
     onResize();
 
 </script>
-<script type="text/javascript">
+@*<script type="text/javascript">
         $(function () {
 
             $("#layout1").ligerLayout();
         });
 
 
-</script>
+</script>*@
 
 </html>

@@ -5,8 +5,13 @@
     <property name="u" ref ="UserInfoService" />
   </object>
 
+  
   <object type="UI.Controllers.LoginController, UI" singleton="false" >
     <property name="UserInfoService" ref ="UserInfoService" />
+  </object>
+
+  <object type="UI.Controllers.ActionInfoController, UI" singleton="false" >
+    <property name="a" ref ="ActionInfoService" />
   </object>
 
 </objects>

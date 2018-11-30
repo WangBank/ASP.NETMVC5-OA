@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActionInfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -24,6 +24,7 @@
           <Property Name="MenuIcon" Type="varchar" MaxLength="512" />
           <Property Name="IconWidth" Type="int" Nullable="false" />
           <Property Name="IconHeight" Type="int" Nullable="false" />
+          <Property Name="IsMenu" Type="bit" />
         </EntityType>
         <EntityType Name="Books">
           <Key>
@@ -311,8 +312,7 @@
             <End Role="UserInfoRoleInfo" EntitySet="UserInfoRoleInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,6 +338,7 @@
           <NavigationProperty Name="R_UserInfo_ActionInfo" Relationship="Self.FK_ActionInfoR_UserInfo_ActionInfo" FromRole="ActionInfo" ToRole="R_UserInfo_ActionInfo" />
           <NavigationProperty Name="Department" Relationship="Self.DepartmentActionInfo" FromRole="ActionInfo" ToRole="Department" />
           <NavigationProperty Name="RoleInfo" Relationship="Self.RoleInfoActionInfo" FromRole="ActionInfo" ToRole="RoleInfo" />
+          <Property Name="IsMenu" Type="Boolean" />
         </EntityType>
         <EntityType Name="Books">
           <Key>
@@ -511,6 +512,7 @@
           <EntitySetMapping Name="ActionInfo">
             <EntityTypeMapping TypeName="OAModel.ActionInfo">
               <MappingFragment StoreEntitySet="ActionInfo">
+                <ScalarProperty Name="IsMenu" ColumnName="IsMenu" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SubTime" ColumnName="SubTime" />
                 <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />

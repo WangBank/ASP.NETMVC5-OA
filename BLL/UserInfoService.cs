@@ -14,10 +14,8 @@ namespace BLL
 {
     public partial class UserInfoService : BaseServices<UserInfo>, IUserInfoService
     {
-        //public override void SetCurrent()
-        //{
-        //    CurrentDal = this.DbSession.userInfoDal;
-        //}
+
+        //多条件查询
         public IQueryable<UserInfo> LoadPageData(UserQueryParam userQueryParam)
         {
             short normalFlag = (short )Model.Enums.DelFlagEnum.Normal;
