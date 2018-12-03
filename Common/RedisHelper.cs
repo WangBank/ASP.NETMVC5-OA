@@ -12,7 +12,7 @@ namespace Common
         public  RedisClient client { get; set; }
         public RedisHelper()
         {
-            client = new RedisClient("127.0.0.1",31540);
+            client = new RedisClient("192.168.5.17",6379);
         }
 
         public  void Add(string key,object value) {

@@ -14,4 +14,8 @@
     <property name="a" ref ="ActionInfoService" />
   </object>
 
+  <object type="UI.Controllers.RoleInfoController, UI" singleton="false" >
+    <property name="role" ref ="RoleInfoService" />
+  </object>
+
 </objects>

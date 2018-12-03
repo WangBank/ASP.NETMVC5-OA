@@ -1,0 +1,296 @@
+﻿@model IEnumerable<Model.RoleInfo>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/locale/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery.easyui-1.4.5.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    @*初始化表格*@
+    <script type="text/javascript">
+        $(function () {
+            initTable();
+            //表单初始为隐藏
+            $("#addDiaLogDiv").css("display", "none");
+            $("#editDiaLogDiv").css("display", "none");
+            $("#conUrl").css("display", "none");
+            //搜索传参
+            bindSearchBtnClick();
+            //是否是菜单绑定事件
+            bindIsMenuClick();
+        });
+
+        function bindIsMenuClick() {
+            $("#IsMenu").change(function () {
+                //显示或者隐藏图标地址
+                $("#conUrl").toggle();
+            });
+        }
+        function bindSearchBtnClick() {
+            $("#btnSearch").click(function () {
+                var data = { searchName: $("#txtsName").val(), searchRemark: $("#txtSchRemark").val() };
+                initTable(data);
+            });
+        }
+        //初始化角色信息表格
+        function initTable(queryParams) {
+            $('#tt').datagrid({
+                url: '/RoleInfo/GetAllRoleInfo',//rows page 默认发送的两个数据
+                title: '角色信息列表',
+                width: 1200,
+                height: 500,
+                idField: 'ID',
+                loadMsg: '正在加载角色信息。。。。',
+                pagination: true,
+                singleSelect: false,
+                pagesize: 10,
+                pagenumber: 1,
+                pagelist: [10, 20, 30],
+                queryParams: queryParams,//让表格加载数据的时候额外传输的数据
+                columns: [[
+                //a.ID,
+                //a.RoleName,
+                //a.Remark,
+                //a.SubTime,
+                //a.ModifiedOn,
+                //a.DelFlag
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '角色编号', width: 80 },
+                    { field: 'RoleInfoName', title: '角色名称', align: 'left', width: 120 },
+                    { field: 'Url', title: 'Url', align: 'left', width: 120 },
+                    { field: 'Remark', title: '备注', align: 'left', width: 120 },
+                    {
+                        field: 'SubTime', title: '提交时间', align: 'left', width: 110, align: 'right', formatter: function (value) {
+                            var date = new Date(parseInt(value.replace("/Date(", "").replace(")/", ""), 10));
+                            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                            //return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                            return date.getFullYear() + "-" + month + "-" + currentDate;
+                        }
+                    }
+
+                ]],
+
+                //角色信息页面上的按钮
+                toolbar: [
+
+                 //角色信息页面，添加按钮
+                    {id: 'btnDownShelf',
+                    text: '添加角色',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        //弹出对话框
+                        addClickEvent();
+                    }
+                    },
+
+                     //角色信息页面，修改按钮
+                     { id: 'btnEdit',
+                         text: '修改角色',
+                         iconCls: 'icon-edit',
+                         handler: function () {
+                             editClickEvent();
+                         }
+                     },
+
+                      //角色信息页面，删除按钮
+                     {id: 'btnDelete',
+                    text: '删除角色',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        deleteEvent();
+                    }}
+                ],
+                onHeaderContextMenu: function (e, field) {
+
+                }
+            });
+        }
+
+        //当角色点添加，弹出对话框
+        function addClickEvent() {
+            $("#addDiaLogDiv").css("display", "block");
+            $("#addDiaLogDiv").dialog({
+                title: '添加角色信息',
+                modal: true,
+                width: 400,
+                height: 400,
+                collapsible: true,
+                minimizable: true,
+                maximizable: true,
+                resizable: true,
+                //页面按钮
+                buttons: [
+                    {
+                        id: 'btnOK',
+                        text: '添加',
+                        iconCls: 'icon-ok',
+                        handler: subAddForm
+                    },
+
+                    {
+                        id: 'btnCancel',
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $("#addDiaLogDiv").dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+
+        //当角色点击修改按钮发生事件
+        function editClickEvent() {
+            //校验是否选中一个角色信息
+            var selections = $('#tt').datagrid("getSelections");
+            if (selections.length != 1) {
+                $.messager.alert("错误提醒", "请选择一行要删除的信息", "question");
+                return;
+            }
+            //给editFrame的src属性赋值
+            $("#editframe").attr("src", "/RoleInfo/Edit/" + selections[0].ID);
+
+            $("#editDiaLogDiv").css("display", "block");
+            $("#editDiaLogDiv").dialog({
+                title: '修改角色信息',
+                modal: true,
+                width: 400,
+                height: 400,
+                collapsible: true,
+                minimizable: true,
+                maximizable: true,
+                resizable: true,
+                //页面按钮
+                buttons: [
+                    {
+                        id: 'btnOK',
+                        text: '确认修改',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            $("#editframe")[0].contentWindow.submitForm();
+                        }
+                    },
+
+                    {
+                        id: 'btnCancel',
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $("#editDiaLogDiv").dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+
+        //当角色点击删除按钮时发生事件
+        function deleteEvent() {
+                //拿到选中的项，api
+                var selections = $('#tt').datagrid("getSelections");
+                if (selections.length <= 0) {
+                    $.messager.alert("错误提醒", "请选择要删除的信息", "question");
+                    return;
+                }
+                var ids = "";
+                //删除所选择的数据
+                for (var key in selections) {
+                    ids = ids + selections[key].ID + ",";
+                }
+
+                ids = ids.substr(0, ids.length - 1);
+                //alert(ids);
+                //当删除成功的时候，刷新页面
+                $.post("/RoleInfo/Delete", { ids: ids }, function (data) {
+                    if (data == "ok") {
+                        //刷新表格
+                        initTable();
+                    } else {
+                        //如果删除失败的话提示删除失败
+                        $.messager.alert("删除失败", "失败了", "error");
+                    }
+                });
+            }
+
+        //把增加表单提交到后台
+        function subAddForm() {
+            $("#addDiaLogDiv form").submit();
+        }
+
+        ////把修改表单提交到后台
+        //function subEditForm() {
+        //    $("#editDiaLogDiv form").submit();
+        //}
+
+        //添加成功的回调事件
+        function afterAdd(data) {
+            if (data == "ok!") {
+                //关闭对话框并刷新表格
+                $("#addDiaLogDiv").dialog("close");
+                initTable();
+            } else {
+                $.messager.alert(data);
+            }
+        }
+
+        //修改成功的回调事件
+        function afterEdit(data) {
+                //关闭对话框并刷新表格
+                $("#editDiaLogDiv").dialog("close");
+                initTable();
+        }
+
+        //将json时间转化为string
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        }
+
+    </script>
+
+</head>
+<body>
+    @*搜索栏*@
+    <div>
+        角色名:<input type="text" name="txtSchName" id="txtsName" /> 备注:<input type="text" name="txtsRemark" id="txtSchRemark" /> <input id="btnSearch" type="button" value="搜索" />
+    </div>
+
+    <table id="tt" style="width:700px;" title="标题，可以用代码" iconcls="icon-edit"></table>
+    @* 添加角色信息div开始 *@
+    <div id="addDiaLogDiv">
+        @using (Ajax.BeginForm("Create", "RoleInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
+        {<table>
+            <tr>
+                <td>角色名：</td>
+                <td><input type="text" name="RoleInfoName" /></td>
+            </tr>
+
+            <tr>
+                <td>备注：</td>
+                <td><input type="text" name="Remark" /></td>
+            </tr>
+        </table>
+        }
+
+    </div>
+    @* 添加角色信息div结束 *@
+
+    @* 修改角色信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
+    <div id="editDiaLogDiv">
+        <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
+    </div>
+    @* 修改角色信息div结束 *@
+
+</body>
+</html>

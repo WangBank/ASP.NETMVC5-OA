@@ -6,4 +6,8 @@
 
   <object name="ActionInfoService" type="BLL.ActionInfoService, BLL" singleton="false" >
   </object>
+
+  <object name="RoleInfoService" type="BLL.RoleInfoService, BLL" singleton="false" >
+  </object>
+  
 </objects>
