@@ -4,4 +4,6 @@ VS2015编写，目前已经完成工作如下
 整体框架分：Model，BLL，DAL，Common，UI，IBLL，IDAL，DALFactory
 IOC框架使用Spring.Net
 ORM框架使用EF6 
+记录缓存是Memcached+cookies代替session，
 注：测试的话跟据ef生成sql语句，调整相应的OAEntities1，修改对应的数据库地址和用户名等等
+2018/11/21：使用ligerui页面布局，完成home/index页面
