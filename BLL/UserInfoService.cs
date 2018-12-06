@@ -39,5 +39,19 @@ namespace BLL
             //分页
             return temp.OrderBy(u => u.ID).Skip(userQueryParam.PageSize*(userQueryParam.PageIndex - 1)).Take(userQueryParam.PageSize).AsQueryable();
         }
+
+        public bool SetRole(int userid, List<int> roleIds)
+        {
+            var user = DbSession.UserInfoDal.GetEntities(u=>u.ID==userid).FirstOrDefault();
+            user.RoleInfo.Clear();
+            var allroel = DbSession.RoleInfoDal.GetEntities(r =>roleIds.Contains(r.ID));
+
+            foreach (var item in allroel)
+            {
+                user.RoleInfo.Add(item);
+            }
+            
+            return DbSession.SaveChanges()>0;
+        }
     }
 }

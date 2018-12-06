@@ -9,11 +9,14 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    //[LoginCheckFilter(IsCheck = false)],调试用
+    [LoginCheckFilter(IsCheck = false)]
     public class UserInfoController : Controller
     {
         public IUserInfoService u { get; set; }
-        
+
+        public IRoleInfoService role { set; get; }
+
+        short deflagenum = (short)Model.Enums.DelFlagEnum.Normal;
         // GET: UserInfo
         //显示详情页
         public ActionResult Index()
@@ -169,5 +172,34 @@ namespace UI.Controllers
         //        return View();
         //    }
         //}
+
+        public ActionResult SetRole(int id)
+        {
+            int userid = id;
+
+            UserInfo uinfo = u.GetEntities(u => u.ID == id).FirstOrDefault();
+
+            List<RoleInfo> rolelist = new List<RoleInfo>(); 
+            ViewBag.RoleList = role.GetEntities(u => u.DelFlag == deflagenum).ToList();
+            return View(uinfo);
+        }
+
+        public ActionResult ProcessSetRole(int UId)
+        {
+            int userid = UId;
+            List<int> rolelist = new List<int>();
+            foreach (var item in Request.Form.AllKeys)
+            {
+
+                if (item.StartsWith("ckb_"))
+                {
+                    int roleid =int.Parse(item.Replace("ckb_",""));
+                    rolelist.Add(roleid);
+                }
+            }
+            u.SetRole(userid, rolelist);
+            return Content("ok");
+
+        }
     }
 }

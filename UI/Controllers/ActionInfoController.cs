@@ -11,11 +11,13 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-   // [LoginCheckFilter(IsCheck = false)]
+   [LoginCheckFilter(IsCheck = false)]
     public class ActionInfoController : Controller
     {
         public IActionInfoService a { get; set; }
-       short deflagenum =  (short)Model.Enums.DelFlagEnum.Normal;
+
+        public IRoleInfoService role { set; get; }
+        short deflagenum =  (short)Model.Enums.DelFlagEnum.Normal;
         // GET: ActionInfo
         public ActionResult Index()
         {
@@ -107,5 +109,33 @@ namespace UI.Controllers
             }
         }
 
+        public ActionResult SetRole(int id)
+        {
+            int actionid = id;
+
+            ActionInfo ainfo = a.GetEntities(u => u.ID == id).FirstOrDefault();
+
+            List<RoleInfo> rolelist = new List<RoleInfo>();
+            ViewBag.RoleList = role.GetEntities(u => u.DelFlag == deflagenum).ToList();
+            return View(ainfo);
+        }
+
+        public ActionResult ProcessSetRole(int UId)
+        {
+            int actionid = UId;
+            List<int> rolelist = new List<int>();
+            foreach (var item in Request.Form.AllKeys)
+            {
+
+                if (item.StartsWith("ckb_"))
+                {
+                    int roleid = int.Parse(item.Replace("ckb_", ""));
+                    rolelist.Add(roleid);
+                }
+            }
+            a.SetRole(actionid, rolelist);
+            return Content("ok");
+
+        }
     }
 }

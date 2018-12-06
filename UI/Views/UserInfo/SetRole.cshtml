@@ -1,0 +1,50 @@
+﻿@model Model.UserInfo
+@using Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SetRole</title>
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        function AfterSetRole(data) {
+            if (data == "ok") {
+                //调用父容器的方法刷新
+                window.parent.window.afterSetRole();
+            } else {
+                alert("设置失败");
+            }
+        }
+        //提交按钮
+        function submitForm() {
+            $("form").submit();
+        }
+    </script>
+</head>
+<body>
+    <div> 
+        <h2>正在为角色：@Model.UName 设置角色</h2>
+        <hr />
+        @{ 
+            List<RoleInfo> allroles = ViewBag.RoleList;
+            using (Ajax.BeginForm("ProcessSetRole", "UserInfo", new AjaxOptions() { OnSuccess = "AfterSetRole" }))
+            {
+                <input hidden name="UId" value="@Model.ID" />
+                foreach (var item in allroles)
+                {
+                    string str = "ckb_" + item.ID;
+                <input type="checkbox" name="@str" id="@str" value="@str"  /> 
+                <label for="@str">@item.RoleName</label>
+                <hr />
+                    }
+            }
+        }
+    </div>
+</body>
+</html>

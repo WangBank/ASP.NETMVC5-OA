@@ -11,5 +11,7 @@ namespace IBLL
     {
         //多条件查询
         IQueryable<UserInfo> LoadPageData(Model.Params.UserQueryParam userQueryParam);
+
+        bool SetRole(int userid, List<int> roleIds);
     }
 }

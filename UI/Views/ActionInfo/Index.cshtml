@@ -124,11 +124,65 @@
                     iconCls: 'icon-cancel',
                     handler: function () {
                         deleteEvent();
-                    }}
+                    }
+                     },
+                     //权限信息页面，设置角色按钮
+                     {
+                         id: 'btnSetRole',
+                         text: '设置角色',
+                         iconCls: 'icon-redo',
+                         handler: function () {
+                             setRoleClickEvent();
+                         }
+                     }
                 ],
                 onHeaderContextMenu: function (e, field) {
 
                 }
+            });
+        }
+
+        //当用户点击设置角色按钮发生事件
+        function setRoleClickEvent() {
+            //校验是否选中一个权限信息
+            var selections = $('#tt').datagrid("getSelections");
+            if (selections.length != 1) {
+                $.messager.alert("错误提醒", "请选择一行要设置角色的信息", "question");
+                return;
+            }
+            //给setRoleframe的src属性赋值
+            $("#setRoleframe").attr("src", "/ActionInfo/SetRole/" + selections[0].ID);
+
+            $("#setRoleDiaLogDiv").css("display", "block");
+            $("#setRoleDiaLogDiv").dialog({
+                title: '设置权限角色信息',
+                modal: true,
+                width: 400,
+                height: 400,
+                collapsible: true,
+                minimizable: true,
+                maximizable: true,
+                resizable: true,
+                //页面按钮
+                buttons: [
+                    {
+                        id: 'btnOK',
+                        text: '确认修改',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            $("#setRoleframe")[0].contentWindow.submitForm();
+                        }
+                    },
+
+                    {
+                        id: 'btnCancel',
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $("#setRoleDiaLogDiv").dialog("close");
+                        }
+                    }
+                ]
             });
         }
 
@@ -273,6 +327,13 @@
             return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         }
 
+        //设置角色成功的回调事件
+        function afterSetRole(data) {
+            //关闭对话框并刷新表格
+            $("#setRoleDiaLogDiv").dialog("close");
+            initTable();
+        }
+
     </script>
 
 </head>
@@ -331,6 +392,12 @@
         <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
     </div>
     @* 修改权限信息div结束 *@
+
+    @* 设置用户角色信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
+    <div id="setRoleDiaLogDiv">
+        <iframe id="setRoleframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
+    </div>
+    @* 设置用户角色信息div结束 *@
 
 </body>
 </html>
