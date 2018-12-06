@@ -80,6 +80,7 @@
           <Property Name="UserInfoID" Type="int" Nullable="false" />
           <Property Name="ActionInfoID" Type="int" Nullable="false" />
           <Property Name="IsPass" Type="bit" Nullable="false" />
+          <Property Name="Deflag" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="RoleInfo">
           <Key>
@@ -390,6 +391,7 @@
           <Property Name="IsPass" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ActionInfo" Relationship="Self.FK_ActionInfoR_UserInfo_ActionInfo" FromRole="R_UserInfo_ActionInfo" ToRole="ActionInfo" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfoR_UserInfo_ActionInfo" FromRole="R_UserInfo_ActionInfo" ToRole="UserInfo" />
+          <Property Name="Deflag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="RoleInfo">
           <Key>
@@ -575,6 +577,7 @@
           <EntitySetMapping Name="R_UserInfo_ActionInfo">
             <EntityTypeMapping TypeName="OAModel.R_UserInfo_ActionInfo">
               <MappingFragment StoreEntitySet="R_UserInfo_ActionInfo">
+                <ScalarProperty Name="Deflag" ColumnName="Deflag" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
                 <ScalarProperty Name="ActionInfoID" ColumnName="ActionInfoID" />

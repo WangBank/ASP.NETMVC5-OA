@@ -27,6 +27,8 @@ using System;
 
     public bool IsPass { get; set; }
 
+    public short Deflag { get; set; }
+
 
 
     public virtual ActionInfo ActionInfo { get; set; }

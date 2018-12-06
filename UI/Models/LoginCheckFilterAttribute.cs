@@ -17,6 +17,7 @@ namespace UI.Models
         public UserInfo LoginUser { get; set; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            filterContext.HttpContext.Response.AppendHeader("P3P", "CP=CAO PSA OUR");
             base.OnActionExecuting(filterContext);
             //if (IsCheck)
             //{

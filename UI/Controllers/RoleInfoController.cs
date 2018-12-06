@@ -9,7 +9,7 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    [LoginCheckFilter(IsCheck = false)]
+    //[LoginCheckFilter(IsCheck = false)]
     public class RoleInfoController : Controller
     {
         public IRoleInfoService role { get; set; }

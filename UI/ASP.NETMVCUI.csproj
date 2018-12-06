@@ -832,6 +832,7 @@
     <Content Include="Content\ligerui\Source\V1.1.9升级必看.txt" />
     <Content Include="Content\ligerui\Source\welcome.htm" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\tableStyle.css" />
     <Content Include="Content\themes\black\accordion.css" />
     <Content Include="Content\themes\black\calendar.css" />
     <Content Include="Content\themes\black\combo.css" />
@@ -1253,6 +1254,7 @@
     <Content Include="Views\RoleInfo\Index.cshtml" />
     <Content Include="Views\UserInfo\SetRole.cshtml" />
     <Content Include="Views\ActionInfo\SetRole.cshtml" />
+    <Content Include="Views\UserInfo\SetAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\login\" />
@@ -1317,7 +1319,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54886</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54886/</IISUrl>
+          <IISUrl>http://192.168.5.16:54886/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

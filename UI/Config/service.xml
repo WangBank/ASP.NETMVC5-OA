@@ -9,5 +9,9 @@
 
   <object name="RoleInfoService" type="BLL.RoleInfoService, BLL" singleton="false" >
   </object>
+
+  <object name="R_UserInfo_ActionInfoService" type="BLL.R_UserInfo_ActionInfoService, BLL" singleton="false" >
+  </object>
   
+
 </objects>

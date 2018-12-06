@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Model.ActionInfo>
+@using Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+    <title>SetAction</title>
+    <script type="text/javascript">
+        $(function () {
+            //删除按钮去掉选中状态
+            $(".btnDel").click(function () {
+                if ($(this).siblings(":checked").length > 0) {
+
+                    $(this).siblings(":radio").attr("checked", false);
+                    //后台删除数据
+                    $.post("/UserInfo/DeleteUserAction", { uid: $(this).attr("uid"), actionId: $(this).attr("actionId") }, function (data) {
+                        if (data == "ok") {
+                            alert(data);
+                        }
+                    });
+                }
+            });
+
+            //
+            $(":radio").click(function () {
+                //发送异步请求
+                var uid = $(this).attr("uid");
+                var actionid = $(this).attr("actionid");
+                var value = $(this).attr("value");
+
+                $.post("/UserInfo/SetUserAction", { uid: uid, actionid: actionid, value: value }, function (data) {
+                    if (data == "ok") {
+                        alert("调整权限成功");
+                    }
+                })
+                });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        @{
+            UserInfo user = ViewBag.UserInfo;
+            <h2>正在为用户：  @user.UName 设置特殊权限</h2>
+            <table>
+                <tr>
+                    <th>权限ID</th>
+                    <th>权限名称</th>
+                    <th>权限地址</th>
+                    <th>请求方法</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    string strid = "rd_" + item.ID;
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.ActionInfoName</td>
+                        <td>@item.Url</td>
+                        <td>@item.HttpMethod</td>
+                        <td>
+                            允许<input type="radio" actionId="@item.ID" uid="@user.ID" name="@strid" value="1" />
+                            &nbsp;
+                            拒绝<input type="radio" actionId="@item.ID" uid="@user.ID" name="@strid" value="0" />
+                            <input type="button"  class="btnDel" id="btnDelete" value="删除" actionId="@item.ID" uid="@user.ID"/>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</body>
+</html>
+

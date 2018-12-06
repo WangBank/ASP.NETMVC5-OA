@@ -9,13 +9,16 @@ using UI.Models;
 
 namespace UI.Controllers
 {
-    [LoginCheckFilter(IsCheck = false)]
+    //[LoginCheckFilter(IsCheck = false)]
     public class UserInfoController : Controller
     {
         public IUserInfoService u { get; set; }
 
         public IRoleInfoService role { set; get; }
 
+        public IActionInfoService action { set; get; }
+
+        public IR_UserInfo_ActionInfoService ira { set; get; }
         short deflagenum = (short)Model.Enums.DelFlagEnum.Normal;
         // GET: UserInfo
         //显示详情页
@@ -173,6 +176,8 @@ namespace UI.Controllers
         //    }
         //}
 
+
+         //设置角色
         public ActionResult SetRole(int id)
         {
             int userid = id;
@@ -187,6 +192,7 @@ namespace UI.Controllers
             return View(uinfo);
         }
 
+        //设置用户角色
         public ActionResult ProcessSetRole(int UId)
         {
             int userid = UId;
@@ -203,6 +209,46 @@ namespace UI.Controllers
             u.SetRole(userid, rolelist);
             return Content("ok");
 
+        }
+
+        //设置特殊权限
+        public ActionResult SetAction(int id)
+        {
+            int userid = id;
+            ViewBag.UserInfo= u.GetEntities(u => u.ID == userid).FirstOrDefault();
+            var Model = action.GetEntities(a=>a.DelFlag== deflagenum);
+            return View(Model);
+        }
+
+        //删除用户权限
+        public ActionResult DeleteUserAction(int uid,int actionId)
+        {
+            var iras = ira.GetEntities(u=>u.UserInfoID==uid&&u.ActionInfoID==actionId).FirstOrDefault();
+            if(iras != null)
+            {
+                iras.Deflag = (short)Model.Enums.DelFlagEnum.Deleted;
+                ira.Edit(iras);
+            }
+            return Content("ok");
+        }
+
+        public ActionResult SetUserAction(int uid,int actionid,int value)
+        {
+            var iras = ira.GetEntities(u => u.UserInfoID == uid && u.ActionInfoID == actionid).FirstOrDefault();
+            if (iras != null)
+            {
+                iras.IsPass = value == 1 ? true : false;
+                ira.Edit(iras);
+            }else
+            {
+                R_UserInfo_ActionInfo ira1 = new R_UserInfo_ActionInfo();
+                ira1.IsPass = value == 1 ? true : false;
+                ira1.UserInfoID = uid;
+                ira1.ActionInfoID = actionid;
+                ira1.Deflag = deflagenum;
+                ira.Add(ira1);
+            }
+            return Content("ok");
         }
     }
 }

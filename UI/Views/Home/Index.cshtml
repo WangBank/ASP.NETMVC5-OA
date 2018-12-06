@@ -107,18 +107,11 @@
 </head>
 
 <body style="overflow: hidden;background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
-    layout
-
-    @*<div id="layout1"> 
-        <div position="top">
-            <h1>王银行的OA</h1>
-        </div>*@
         <div position="center"   style="overflow: hidden; background: url(/Content/ligerui/Source/lib/images/background.jpg) no-repeat  center center;">
             <div id="winlinks">
                 <ul></ul>
             </div>
         </div>
-    @*</div>*@
 
 </body>
 <script type="text/javascript">
@@ -142,9 +135,9 @@
         return win;
     }
     var links = [
-            { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '用户列表', url: '/UserInfo/Index' },
-            { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '权限管理', url: '/ActionInfo/Index' },
-            { icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' },
+            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '用户列表', url: '/UserInfo/Index' },
+            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '权限管理', url: '/ActionInfo/Index' },
+            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' },
         ];
 
     //窗口发生变化图标自适应
@@ -163,7 +156,8 @@
 
     }
     //图标初始化
-    function linksInit() {
+    function linksInit(data) {
+        links = data;
         for (var i = 0, l = links.length; i < l; i++) {
             var link = links[i];
             var jlink;
@@ -190,17 +184,12 @@
     $.ligerui.win.removeTaskbar = function () { }; //不允许移除
     $.ligerui.win.createTaskbar(); //页面加载时创建任务栏
 
-    linksInit();
-    onResize();
+    $.post("/Home/LoadUserMenu", {}, function (data) {
+        linksInit(data);
+        onResize();
+    })
+
+
 
 </script>
-@*<script type="text/javascript">
-        $(function () {
-
-            $("#layout1").ligerLayout();
-        });
-
-
-</script>*@
-
 </html>

@@ -4,11 +4,17 @@
   <object type="UI.Controllers.UserInfoController, UI" singleton="false" >
     <property name="u" ref ="UserInfoService" />
     <property name="role" ref ="RoleInfoService" />
+    <property name="action" ref ="ActionInfoService" />
+    <property name="ira" ref ="R_UserInfo_ActionInfoService" />
   </object>
 
   
   <object type="UI.Controllers.LoginController, UI" singleton="false" >
     <property name="UserInfoService" ref ="UserInfoService" />
+  </object>
+
+  <object type="UI.Controllers.HomeController, UI" singleton="false" >
+    <property name="ias" ref ="ActionInfoService" />
   </object>
 
   <object type="UI.Controllers.ActionInfoController, UI" singleton="false" >

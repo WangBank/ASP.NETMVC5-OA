@@ -55,9 +55,10 @@ namespace UI.Controllers
             //生成随机key
             string userid = Guid.NewGuid().ToString();
             //将key存到cookies中
+            Response.AppendHeader("P3P", "CP=CAO PSA OUR");
             Response.Cookies["userid"].Value = userid;
             //将用户信息存储到memcached中
-            CacheHelper.AddCache(userid, userinfo, DateTime.Now.AddMinutes(20));
+            CacheHelper.AddCache(userid, userinfo, DateTime.Now.AddMinutes(40));
             // Session["LoginUser"] = userinfo;
             return Content("ok");
         }
