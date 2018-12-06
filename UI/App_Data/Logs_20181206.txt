@@ -65,3 +65,4 @@ System.IO.IOException: SerializationException thrown while trying to deserialize
    дк Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
 2018-12-06 09:51:45,882 [14] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
 2018-12-06 10:01:23,599 [11] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-12-06 10:18:10,697 [8] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool

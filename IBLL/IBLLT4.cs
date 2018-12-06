@@ -12,7 +12,8 @@ namespace IBLL
     
 	    public partial interface IActionInfoService:IBaseService<ActionInfo>
     {
-	}
+        bool SetRole(int actionid, List<int> roleIds);
+    }
     
 	    public partial interface IBooksService:IBaseService<Books>
     {

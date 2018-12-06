@@ -22,7 +22,21 @@ namespace BLL
         {
             CurrentDal = this.DbSession.ActionInfoDal;
         }
-		}
+
+        public bool SetRole(int actionid, List<int> roleIds)
+        {
+            var action = DbSession.ActionInfoDal.GetEntities(u => u.ID == actionid).FirstOrDefault();
+            action.RoleInfo.Clear();
+            var allroel = DbSession.RoleInfoDal.GetEntities(r => roleIds.Contains(r.ID));
+
+            foreach (var item in allroel)
+            {
+                action.RoleInfo.Add(item);
+            }
+
+            return DbSession.SaveChanges() > 0;
+        }
+    }
     
 	    public partial class BooksService : BaseServices<Books>,IBooksService
     {

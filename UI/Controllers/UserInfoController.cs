@@ -181,6 +181,9 @@ namespace UI.Controllers
 
             List<RoleInfo> rolelist = new List<RoleInfo>(); 
             ViewBag.RoleList = role.GetEntities(u => u.DelFlag == deflagenum).ToList();
+
+            ViewBag.ExitRoles = (from r in uinfo.RoleInfo
+                                 select r.ID).ToList();
             return View(uinfo);
         }
 

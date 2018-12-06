@@ -1252,6 +1252,7 @@
     <Content Include="Views\ActionInfo\Edit.cshtml" />
     <Content Include="Views\RoleInfo\Index.cshtml" />
     <Content Include="Views\UserInfo\SetRole.cshtml" />
+    <Content Include="Views\ActionInfo\SetRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\login\" />

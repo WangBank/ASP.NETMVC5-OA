@@ -29,17 +29,25 @@
 </head>
 <body>
     <div> 
-        <h2>正在为角色：@Model.UName 设置角色</h2>
+        <h2>正在为用户：@Model.UName 设置角色</h2>
         <hr />
         @{ 
             List<RoleInfo> allroles = ViewBag.RoleList;
+            List<int> rolelist = ViewBag.ExitRoles;
             using (Ajax.BeginForm("ProcessSetRole", "UserInfo", new AjaxOptions() { OnSuccess = "AfterSetRole" }))
             {
                 <input hidden name="UId" value="@Model.ID" />
                 foreach (var item in allroles)
                 {
                     string str = "ckb_" + item.ID;
-                <input type="checkbox" name="@str" id="@str" value="@str"  /> 
+                    if (rolelist.Contains(item.ID))
+                    {
+                        <input type="checkbox" checked="checked" name="@str" id="@str" value="@str" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="@str" id="@str" value="@str" />
+                    }
                 <label for="@str">@item.RoleName</label>
                 <hr />
                     }

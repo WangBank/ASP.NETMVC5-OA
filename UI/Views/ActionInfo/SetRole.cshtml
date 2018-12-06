@@ -1,65 +1,55 @@
 ﻿@model Model.ActionInfo
-
+@using Model;
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-@using Model;
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SetRole</title>
-    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/jquery-1.11.3.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
-        function afterSetRole(data) {
+        function AfterSetRole(data) {
             if (data == "ok") {
+                //调用父容器的方法刷新
                 window.parent.window.afterSetRole();
+            } else {
+                alert("设置失败");
             }
         }
-
-        function submitForm(){
+        //提交按钮
+        function submitForm() {
             $("form").submit();
-            alert("ok");
         }
     </script>
 </head>
 <body>
-    <div>
-        <h2>当前给权限：@Model.ActionInfoName 设置角色</h2>
+    <div> 
+        <h2>正在为权限：@Model.ActionInfoName 设置角色</h2>
         <hr />
         @{
-            List<RoleInfo> list = ViewBag.AllRoles;
-            List<int> exsitRoleList = ViewBag.ExitRoles;
-            using (Ajax.BeginForm("ProcessSetRole", "ActionInfo", new AjaxOptions()
+            List<RoleInfo> allroles = ViewBag.RoleList;
+            List<int> rolelist = ViewBag.ExitRoles;
+            using (Ajax.BeginForm("ProcessSetRole", "ActionInfo", new AjaxOptions() { OnSuccess = "AfterSetRole" }))
             {
-                OnSuccess = "afterSetRole"
-            }))
-            {
-                //排版
-                <input type="hidden" name="UId" value="@Model.ID" />
-                int i = 0;
-                foreach (var item in list)
+                <input hidden name="UId" value="@Model.ID" />
+                foreach (var item in allroles)
                 {
                     string str = "ckb_" + item.ID;
-                    //换行
-                    if (i > 0)
+                    if (rolelist.Contains(item.ID))
                     {
-                        <hr />
-                    }
-
-                    if (exsitRoleList.Contains(item.ID))
-                    {
-                        <input type="checkbox" checked="checked" value="@str" name="@str" id="@str" />
+                        <input type="checkbox" checked="checked" name="@str" id="@str" value="@str" />
                     }
                     else
                     {
-                        <input type="checkbox" value="@str" name="@str" id="@str" />
+                        <input type="checkbox" name="@str" id="@str" value="@str" />
                     }
-                    <input type="checkbox" name="@str" value="@str" id="@str" />
                     <label for="@str">@item.RoleName</label>
-                    i++;
+                    <hr />
                 }
             }
         }
