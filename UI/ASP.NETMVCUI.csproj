@@ -291,6 +291,9 @@
     </EmbeddedResource>
     <Content Include="App_Data\Logs_20181114.txt" />
     <Content Include="App_Data\Logs_20181115.txt" />
+    <EmbeddedResource Include="Config\filters.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\Home\3DSMAX.png" />
@@ -1167,6 +1170,7 @@
     <Content Include="Content\themes\metro\validatebox.css" />
     <Content Include="Content\themes\metro\window.css" />
     <Content Include="Content\themes\mobile.css" />
+    <Content Include="Error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

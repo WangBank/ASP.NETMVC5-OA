@@ -1,6 +1,9 @@
 ﻿using Common;
 using Common.Cache;
+using IBLL;
 using Model;
+using Spring.Context;
+using Spring.Context.Support;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +51,42 @@ namespace UI.Models
                     else
                     {
                         filterContext.HttpContext.Response.Redirect("/Login/Index");
+                    }
+                }
+                if (LoginUser.UName == "wangzhen")
+                {
+                    return;
+                }
+                else
+                {
+                    string url = filterContext.HttpContext.Request.Url.AbsolutePath;
+                    string httpmethod = filterContext.HttpContext.Request.HttpMethod.ToLower();
+
+                    //与当前登录的用户的权限进行对比
+                    IApplicationContext ctx = ContextRegistry.GetContext();
+                    IActionInfoService ActionInfoService = ctx.GetObject("ActionInfoService") as IActionInfoService;
+                    IR_UserInfo_ActionInfoService UAInfoService = ctx.GetObject("R_UserInfo_ActionInfoService") as IR_UserInfo_ActionInfoService;
+                    var action = ActionInfoService.GetEntities(a => a.Url.ToLower() == url && a.HttpMethod.ToLower() == httpmethod).FirstOrDefault();
+                    if (action == null)
+                    {
+                        filterContext.HttpContext.Response.Redirect("/Error.html");
+                    }
+
+                    //特殊权限校验
+                    var rUAs = UAInfoService.GetEntities(u=>u.UserInfoID==LoginUser.ID);
+                    var item = (from a in rUAs
+                                where a.ActionInfoID == action.ID
+                                select a).FirstOrDefault();
+                    if (item != null)
+                    {
+                        if(item.IsPass == true)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            filterContext.HttpContext.Response.Redirect("/Error.html");
+                        }
                     }
                 }
                 

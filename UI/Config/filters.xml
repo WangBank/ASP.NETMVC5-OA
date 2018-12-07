@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object name="ActionInfoService" type="BLL.ActionInfoService, BLL">
+  </object>
+
+  <object name="R_UserInfo_ActionInfoService" type="BLL.R_UserInfo_ActionInfoService, BLL">
+  </object>
+</objects>
