@@ -2,7 +2,8 @@
 @{
     Layout = null;
 }
-
+@using Model;
+@using System.Text;
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -121,12 +122,14 @@
     //点击图标的时候,打开对话框
     function f_open(url, title, icon) {
         var win = $.ligerDialog.open(
-        { height: 500, url: url, width: 730, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title, slide: false, buttons: [
-            { text: '确定', onclick: function (item, Dialog, index) {
-                win.hide();
-            }
-            }
-        ]
+        {
+            height: 500, url: url, width: 730, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title, slide: false, buttons: [
+              {
+                  text: '确定', onclick: function (item, Dialog, index) {
+                      win.hide();
+                  }
+              }
+            ]
         });
         var task = jQuery.ligerui.win.tasks[win.id];
         if (task) {
@@ -134,11 +137,22 @@
         }
         return win;
     }
+    @{
+        List<ActionInfo> menus = ViewBag.AllMenu;
+        StringBuilder sb = new StringBuilder();
+        foreach (var item in menus)
+        {
+            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' }
+            sb.Append("{");
+            sb.AppendFormat(" icon: '{0}', title: '{1}', url: '{2}' ",item.MenuIcon,item.ActionInfoName,item.Url);
+            sb.Append("},");
+
+        }
+        string str = sb.ToString().TrimEnd(',');
+    }
     var links = [
-            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '用户列表', url: '/UserInfo/Index' },
-            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '权限管理', url: '/ActionInfo/Index' },
-            //{ icon: '/Content/ligerui/Source/lib/images/3DSMAX.png', title: '角色管理', url: '/RoleInfo/Index' },
-        ];
+        @Html.Raw(str)
+    ];
 
     //窗口发生变化图标自适应
     function onResize() {
@@ -156,8 +170,7 @@
 
     }
     //图标初始化
-    function linksInit(data) {
-        links = data;
+    function linksInit() {
         for (var i = 0, l = links.length; i < l; i++) {
             var link = links[i];
             var jlink;
@@ -185,11 +198,11 @@
     $.ligerui.win.createTaskbar(); //页面加载时创建任务栏
 
     $.post("/Home/LoadUserMenu", {}, function (data) {
-        linksInit(data);
-        onResize();
+
     })
 
-
+    linksInit();
+    onResize();
 
 </script>
 </html>

@@ -1,0 +1,112 @@
+2018-12-07 08:32:27,485 [51] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-12-07 08:45:39,830 [11] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-12-07 08:57:38,722 [6] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-12-07 09:22:42,924 [9] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-12-07 09:41:42,941 [8] ERROR Memcached.Client.SockIOPool - Trying to initialize an already initialized pool
+2018-12-07 09:41:43,012 [8] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-12-07 09:41:43,037 [8] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737 ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-12-07 09:41:43,097 [9] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-12-07 09:41:43,106 [9] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737 ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-12-07 09:41:43,110 [8] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-12-07 09:41:43,114 [9] ERROR Memcached.Client.MemcachedClient - SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+2018-12-07 09:41:43,118 [8] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737 ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-12-07 09:41:43,131 [9] ERROR Memcached.Client.MemcachedClient - Exception thrown while trying to get object from cache for key: 3b905e21-9818-4c4a-8445-81e4250d5737
+System.IO.IOException: SerializationException thrown while trying to deserialize for key: 3b905e21-9818-4c4a-8445-81e4250d5737 ---> System.Runtime.Serialization.SerializationException: 无法找到程序集“EntityFrameworkDynamicProxies-Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”。
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryAssemblyInfo.GetAssembly()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.GetType(BinaryAssemblyInfo assemblyInfo, String name)
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectMap..ctor(String objectName, String[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, Object[] typeInformationA, Int32[] memberAssemIds, ObjectReader objectReader, Int32 objectId, BinaryAssemblyInfo assemblyInfo, SizedArray assemIdToAssemblyTable)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.ReadObjectWithMapTyped(BinaryObjectWithMapTyped record)
+   在 System.Runtime.Serialization.Formatters.Binary.__BinaryParser.Run()
+   在 System.Runtime.Serialization.Formatters.Binary.ObjectReader.Deserialize(HeaderHandler handler, __BinaryParser serParser, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(Stream serializationStream, HeaderHandler handler, Boolean fCheck, Boolean isCrossAppDomain, IMethodCallMessage methodCallMessage)
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Memcached.Client.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString)
+   在 Memcached.Client.MemcachedClient.Get(String key, Object hashCode, Boolean asString)
+2018-12-07 09:41:43,232 [9] ERROR Logger - System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 UI.Controllers.HomeController.LoadUserMenu() 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Controllers\HomeController.cs:行号 42
+   在 UI.Controllers.HomeController.Index() 位置 E:\Projects\ASP.NET-MVC-OA-master\UI\Controllers\HomeController.cs:行号 20
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)

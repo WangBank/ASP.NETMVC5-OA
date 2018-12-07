@@ -15,6 +15,7 @@
 
   <object type="UI.Controllers.HomeController, UI" singleton="false" >
     <property name="ias" ref ="ActionInfoService" />
+    <property name="u" ref ="UserInfoService" />
   </object>
 
   <object type="UI.Controllers.ActionInfoController, UI" singleton="false" >
