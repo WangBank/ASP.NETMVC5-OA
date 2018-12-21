@@ -504,7 +504,115 @@
             <End Role="RoleInfo" EntitySet="RoleInfo" />
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
+          <EntitySet Name="WF_TempSet" EntityType="OAModel.WF_Temp" />
+          <EntitySet Name="WF_ItemSet" EntityType="OAModel.WF_Item" />
+          <EntitySet Name="FileInfoSet" EntityType="OAModel.FileInfo" />
+          <AssociationSet Name="WF_ItemFileInfo" Association="OAModel.WF_ItemFileInfo">
+            <End Role="WF_Item" EntitySet="WF_ItemSet" />
+            <End Role="FileInfo" EntitySet="FileInfoSet" />
+          </AssociationSet>
+          <AssociationSet Name="WF_TempWF_Item" Association="OAModel.WF_TempWF_Item">
+            <End Role="WF_Temp" EntitySet="WF_TempSet" />
+            <End Role="WF_Item" EntitySet="WF_ItemSet" />
+          </AssociationSet>
+          <EntitySet Name="WF_StepSet" EntityType="OAModel.WF_Step" />
+          <AssociationSet Name="WF_ItemWF_Step" Association="OAModel.WF_ItemWF_Step">
+            <End Role="WF_Item" EntitySet="WF_ItemSet" />
+            <End Role="WF_Step" EntitySet="WF_StepSet" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="WF_Temp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TempName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="TempForm" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="64" />
+          <Property Name="Deflag" Type="Int16" Nullable="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActityType" Type="String" Nullable="false" />
+          <NavigationProperty Name="WF_Item" Relationship="OAModel.WF_TempWF_Item" FromRole="WF_Temp" ToRole="WF_Item" />
+        </EntityType>
+        <EntityType Name="WF_Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="StartBy" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="Level" Type="Int16" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Deflag" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="FileInfo" Relationship="OAModel.WF_ItemFileInfo" FromRole="WF_Item" ToRole="FileInfo" />
+          <Property Name="WFItemID" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="WF_Temp" Relationship="OAModel.WF_TempWF_Item" FromRole="WF_Item" ToRole="WF_Temp" />
+          <Property Name="WF_TempID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WF_Step" Relationship="OAModel.WF_ItemWF_Step" FromRole="WF_Item" ToRole="WF_Step" />
+        </EntityType>
+        <EntityType Name="FileInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="FileType" Type="String" Nullable="true" MaxLength="32" />
+          <Property Name="FilePath" Type="String" Nullable="true" MaxLength="32" />
+          <Property Name="FileSize" Type="String" Nullable="true" MaxLength="32" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="64" />
+          <Property Name="Deflag" Type="Int16" Nullable="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="WF_Item" Relationship="OAModel.WF_ItemFileInfo" FromRole="FileInfo" ToRole="WF_Item" />
+        </EntityType>
+        <Association Name="WF_ItemFileInfo">
+          <End Type="OAModel.WF_Item" Role="WF_Item" Multiplicity="*" />
+          <End Type="OAModel.FileInfo" Role="FileInfo" Multiplicity="*" />
+        </Association>
+        <Association Name="WF_TempWF_Item">
+          <End Type="OAModel.WF_Temp" Role="WF_Temp" Multiplicity="1" />
+          <End Type="OAModel.WF_Item" Role="WF_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_Temp">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WF_Item">
+              <PropertyRef Name="WF_TempID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WF_Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StepName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="ProcessBy" Type="Int32" Nullable="false" />
+          <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProcessTime" Type="Time" Nullable="false" />
+          <Property Name="ProcessResult" Type="String" Nullable="false" />
+          <Property Name="ProcessCommit" Type="String" Nullable="false" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="IsStartStep" Type="Boolean" Nullable="false" />
+          <Property Name="IsEndStep" Type="Boolean" Nullable="false" />
+          <Property Name="ParentStepID" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="WF_Item" Relationship="OAModel.WF_ItemWF_Step" FromRole="WF_Step" ToRole="WF_Item" />
+          <Property Name="WF_ItemID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="WF_ItemWF_Step">
+          <End Type="OAModel.WF_Item" Role="WF_Item" Multiplicity="1" />
+          <End Type="OAModel.WF_Step" Role="WF_Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WF_Step">
+              <PropertyRef Name="WF_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

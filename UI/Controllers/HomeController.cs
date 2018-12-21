@@ -48,7 +48,7 @@ namespace UI.Controllers
                                from a in r.ActionInfo
                                select a.ID).ToList();
 
-            //特殊权限
+            //查询特殊权限
             var alldenyactionids = (from r in user.R_UserInfo_ActionInfo
                                    where r.IsPass == false
                                    select r.ActionInfoID).ToList();

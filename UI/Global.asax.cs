@@ -6,7 +6,6 @@ using System.Web.Routing;
 namespace UI
 {
     public class MvcApplication : SpringMvcApplication //System.Web.HttpApplication
-
     {
         protected void Application_Start()
         {

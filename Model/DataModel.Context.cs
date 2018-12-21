@@ -48,6 +48,14 @@ public partial class OAEntities1 : DbContext
 
     public virtual DbSet<UserInfo> UserInfo { get; set; }
 
+    public virtual DbSet<WF_Temp> WF_TempSet { get; set; }
+
+    public virtual DbSet<WF_Item> WF_ItemSet { get; set; }
+
+    public virtual DbSet<FileInfo> FileInfoSet { get; set; }
+
+    public virtual DbSet<WF_Step> WF_StepSet { get; set; }
+
 }
 
 }
