@@ -1,4 +1,7 @@
-﻿ 
+﻿
+
+ 
+
 
 using DAL;
 using IDAL;
@@ -30,6 +33,11 @@ namespace DALFactory
             get { return StaticDalFactory.GetDepartmentDal(); }
         }
    
+	    public IFileInfoDal FileInfoDal
+        {
+            get { return StaticDalFactory.GetFileInfoDal(); }
+        }
+   
 	    public IKeyWordsRankDal KeyWordsRankDal
         {
             get { return StaticDalFactory.GetKeyWordsRankDal(); }
@@ -54,5 +62,21 @@ namespace DALFactory
         {
             get { return StaticDalFactory.GetUserInfoDal(); }
         }
+   
+	    public IWF_ItemDal WF_ItemDal
+        {
+            get { return StaticDalFactory.GetWF_ItemDal(); }
+        }
+   
+	    public IWF_StepDal WF_StepDal
+        {
+            get { return StaticDalFactory.GetWF_StepDal(); }
+        }
+   
+	    public IWF_TempDal WF_TempDal
+        {
+            get { return StaticDalFactory.GetWF_TempDal(); }
+        }
+
 }
 }

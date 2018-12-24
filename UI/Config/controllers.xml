@@ -27,4 +27,8 @@
     <property name="role" ref ="RoleInfoService" />
   </object>
 
+  <object type="UI.Controllers.WFTempController, UI" singleton="false" >
+    <property name="wftemp" ref ="WF_TempService" />
+  </object>
+
 </objects>

@@ -27,7 +27,7 @@ using System;
 
     public System.DateTime SubTime { get; set; }
 
-    public System.TimeSpan ProcessTime { get; set; }
+    public System.DateTime ProcessTime { get; set; }
 
     public string ProcessResult { get; set; }
 

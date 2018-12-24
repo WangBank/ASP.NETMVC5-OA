@@ -38,11 +38,11 @@ using System;
 
     public string Remark { get; set; }
 
-    public short Deflag { get; set; }
-
     public System.DateTime SubTime { get; set; }
 
     public string ActityType { get; set; }
+
+    public short Delflag { get; set; }
 
 
 

@@ -63,7 +63,7 @@
                           <local:WaitForInputCodeActivity x:TypeArguments="x:Int32" InBookMarkName="{x:Null}" OutPutData="{x:Null}" sap2010:WorkflowViewState.IdRef="WaitForInputCodeActivity`1_2" />
                         </State.Entry>
                         <State.Transitions>
-                          <Transition DisplayName="T5" sap2010:WorkflowViewState.IdRef="Transition_3" Condition="True">
+                          <Transition DisplayName="T5" sap2010:WorkflowViewState.IdRef="Transition_3">
                             <Transition.To>
                               <State x:Name="__ReferenceID1" DisplayName="用户重新提交" sap2010:WorkflowViewState.IdRef="State_2">
                                 <State.Entry>
@@ -74,10 +74,24 @@
                                 </State.Transitions>
                               </State>
                             </Transition.To>
+                            <Transition.Action>
+                              <Assign>
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">
+                                    <mca:CSharpReference x:TypeArguments="x:String">TempBookMarkName</mca:CSharpReference>
+                                  </OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">用户提交申请</InArgument>
+                                </Assign.Value>
+                                <sap2010:WorkflowViewState.IdRef>Assign_3</sap2010:WorkflowViewState.IdRef>
+                              </Assign>
+                            </Transition.Action>
+                            <Transition.Condition>True</Transition.Condition>
                           </Transition>
                           <Transition DisplayName="T3" sap2010:WorkflowViewState.IdRef="Transition_7" Condition="True">
                             <Transition.To>
-                              <State x:Name="__ReferenceID4" DisplayName="FinalState" sap2010:WorkflowViewState.IdRef="State_6" IsFinal="True" />
+                              <State x:Name="__ReferenceID4" DisplayName="审批结束" sap2010:WorkflowViewState.IdRef="State_6" IsFinal="True" />
                             </Transition.To>
                           </Transition>
                         </State.Transitions>
@@ -97,7 +111,22 @@
                     </Transition.Action>
                     <Transition.Condition>False</Transition.Condition>
                   </Transition>
-                  <Transition DisplayName="T4" sap2010:WorkflowViewState.IdRef="Transition_5" To="{x:Reference __ReferenceID1}" Condition="False" />
+                  <Transition DisplayName="T4" sap2010:WorkflowViewState.IdRef="Transition_5" To="{x:Reference __ReferenceID1}">
+                    <Transition.Action>
+                      <Assign>
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">
+                            <mca:CSharpReference x:TypeArguments="x:String">TempBookMarkName</mca:CSharpReference>
+                          </OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">用户提交申请</InArgument>
+                        </Assign.Value>
+                        <sap2010:WorkflowViewState.IdRef>Assign_4</sap2010:WorkflowViewState.IdRef>
+                      </Assign>
+                    </Transition.Action>
+                    <Transition.Condition>False</Transition.Condition>
+                  </Transition>
                 </State.Transitions>
               </State>
             </Transition.To>
@@ -126,7 +155,7 @@
     <StateMachine.Variables>
       <Variable x:TypeArguments="x:String" Name="TempBookMarkName" />
     </StateMachine.Variables>
-    <sads:DebugSymbol.Symbol>d0RFOlxQcm9qZWN0c1xBU1AuTkVULU1WQy1PQS1tYXN0ZXJcQWN0aXZpdHlMaWJyYXJ5XEZpbmFsQWN0aXZpdHkueGFtbBgnA4IBEgIBASkHdw8CARswD2YXAgEPPRdUHwIBCUQfSycCAQRQH1CSAQIBAisLK1QCASN0I3QnAgEhaQ9yGAIBHTITODQCARhiK2IwAgEWVxdgIAIBEmSLAWSSAQIBET8bP8YBAgEOQnFCdwIBDE5xTncCAQtGI0bOAQIBCEmbAUmhAQIBBitJK1ECASRwOnBAAgEgbBVsawIBHjUZNWcCARleQl5GAgEVWh1acwIBEw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d0RFOlxQcm9qZWN0c1xBU1AuTkVULU1WQy1PQS1tYXN0ZXJcQWN0aXZpdHlMaWJyYXJ5XEZpbmFsQWN0aXZpdHkueGFtbB4nA58BEgIBASkHlAEPAgEjMA+DARcCARM9F2IfAgEJRB9LJwIBBF4fXowBAgECKwsrVAIBK5EBI5EBJwIBKYYBD48BGAIBJTITODQCASBwK3AwAgEeZRduIAIBGoABK4ABMAIBGXQXfiACARU/Gz/GAQIBElozWjcCARBOH1goAgEMXHFcdwIBC0YjRs4BAgEISZsBSaEBAgEGK0krUQIBLI0BOo0BQAIBKIkBFYkBawIBJjUZNWcCASFsQmxGAgEdaB1ocwIBG3tCe0gCARh3HXdzAgEWVUpVUAIBD1ElUXsCAQ0=</sads:DebugSymbol.Symbol>
   </StateMachine>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -152,6 +181,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="243,61" />
       <sap2010:ViewStateData Id="Transition_3" sap:VirtualizedContainerService.HintSize="430,520">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -198,6 +228,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="243,61" />
       <sap2010:ViewStateData Id="Transition_5" sap:VirtualizedContainerService.HintSize="430,520">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">

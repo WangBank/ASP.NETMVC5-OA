@@ -10,6 +10,9 @@
   <object name="RoleInfoService" type="BLL.RoleInfoService, BLL" singleton="false" >
   </object>
 
+  <object name="WF_TempService" type="BLL.WF_TempService, BLL" singleton="false" >
+  </object>
+
   <object name="R_UserInfo_ActionInfoService" type="BLL.R_UserInfo_ActionInfoService, BLL" singleton="false" >
   </object>
   

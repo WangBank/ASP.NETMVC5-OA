@@ -1,4 +1,7 @@
-﻿using IDAL;
+﻿
+
+
+using IDAL;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -18,6 +21,9 @@ namespace DAL
     public partial class DepartmentDal:BaseDal<Department>,IDepartmentDal
     {
     } 
+    public partial class FileInfoDal:BaseDal<FileInfo>,IFileInfoDal
+    {
+    } 
     public partial class KeyWordsRankDal:BaseDal<KeyWordsRank>,IKeyWordsRankDal
     {
     } 
@@ -33,5 +39,15 @@ namespace DAL
     public partial class UserInfoDal:BaseDal<UserInfo>,IUserInfoDal
     {
     } 
+    public partial class WF_ItemDal:BaseDal<WF_Item>,IWF_ItemDal
+    {
+    } 
+    public partial class WF_StepDal:BaseDal<WF_Step>,IWF_StepDal
+    {
+    } 
+    public partial class WF_TempDal:BaseDal<WF_Temp>,IWF_TempDal
+    {
+    } 
+
 
 }

@@ -64,6 +64,19 @@
           <Property Name="ActionInfo_ID" Type="int" Nullable="false" />
           <Property Name="Department_ID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="FileInfoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="32" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="32" />
+          <Property Name="FileSize" Type="nvarchar" MaxLength="32" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="64" />
+          <Property Name="Deflag" Type="smallint" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="KeyWordsRank">
           <Key>
             <PropertyRef Name="Id" />
@@ -138,6 +151,59 @@
           </Key>
           <Property Name="RoleInfo_ID" Type="int" Nullable="false" />
           <Property Name="UserInfo_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WF_ItemFileInfo">
+          <Key>
+            <PropertyRef Name="WF_Item_ID" />
+            <PropertyRef Name="FileInfo_Id" />
+          </Key>
+          <Property Name="WF_Item_ID" Type="int" Nullable="false" />
+          <Property Name="FileInfo_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WF_ItemSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="StartBy" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="Level" Type="smallint" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="Deflag" Type="smallint" Nullable="false" />
+          <Property Name="WFItemID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WF_TempID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WF_StepSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StepName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="ProcessBy" Type="int" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ProcessTime" Type="datetime" Nullable="false" />
+          <Property Name="ProcessResult" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProcessCommit" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="IsStartStep" Type="bit" Nullable="false" />
+          <Property Name="IsEndStep" Type="bit" Nullable="false" />
+          <Property Name="ParentStepID" Type="int" />
+          <Property Name="WF_ItemID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WF_TempSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TempName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TempForm" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="64" />
+          <Property Name="Delflag" Type="smallint" Nullable="false" />
+          <Property Name="SubTime" Type="datetime" Nullable="false" />
+          <Property Name="ActityType" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_ActionInfoR_UserInfo_ActionInfo">
           <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
@@ -259,11 +325,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WF_ItemFileInfo_FileInfo">
+          <End Role="FileInfoSet" Type="Self.FileInfoSet" Multiplicity="1" />
+          <End Role="WF_ItemFileInfo" Type="Self.WF_ItemFileInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileInfoSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WF_ItemFileInfo">
+              <PropertyRef Name="FileInfo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_ItemFileInfo_WF_Item">
+          <End Role="WF_ItemSet" Type="Self.WF_ItemSet" Multiplicity="1" />
+          <End Role="WF_ItemFileInfo" Type="Self.WF_ItemFileInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_ItemSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WF_ItemFileInfo">
+              <PropertyRef Name="WF_Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_ItemWF_Step">
+          <End Role="WF_ItemSet" Type="Self.WF_ItemSet" Multiplicity="1" />
+          <End Role="WF_StepSet" Type="Self.WF_StepSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_ItemSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WF_StepSet">
+              <PropertyRef Name="WF_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_TempWF_Item">
+          <End Role="WF_TempSet" Type="Self.WF_TempSet" Multiplicity="1" />
+          <End Role="WF_ItemSet" Type="Self.WF_ItemSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_TempSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WF_ItemSet">
+              <PropertyRef Name="WF_TempID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OAModelStoreContainer">
           <EntitySet Name="ActionInfo" EntityType="Self.ActionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentActionInfo" EntityType="Self.DepartmentActionInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileInfoSet" EntityType="Self.FileInfoSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyWordsRank" EntityType="Self.KeyWordsRank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="R_UserInfo_ActionInfo" EntityType="Self.R_UserInfo_ActionInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" Schema="dbo" store:Type="Tables" />
@@ -272,6 +387,10 @@
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfoDepartment" EntityType="Self.UserInfoDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfoRoleInfo" EntityType="Self.UserInfoRoleInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_ItemFileInfo" EntityType="Self.WF_ItemFileInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_ItemSet" EntityType="Self.WF_ItemSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_StepSet" EntityType="Self.WF_StepSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_TempSet" EntityType="Self.WF_TempSet" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ActionInfoR_UserInfo_ActionInfo" Association="Self.FK_ActionInfoR_UserInfo_ActionInfo">
             <End Role="ActionInfo" EntitySet="ActionInfo" />
             <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
@@ -311,6 +430,22 @@
           <AssociationSet Name="FK_UserInfoRoleInfo_UserInfo" Association="Self.FK_UserInfoRoleInfo_UserInfo">
             <End Role="UserInfo" EntitySet="UserInfo" />
             <End Role="UserInfoRoleInfo" EntitySet="UserInfoRoleInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_ItemFileInfo_FileInfo" Association="Self.FK_WF_ItemFileInfo_FileInfo">
+            <End Role="FileInfoSet" EntitySet="FileInfoSet" />
+            <End Role="WF_ItemFileInfo" EntitySet="WF_ItemFileInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_ItemFileInfo_WF_Item" Association="Self.FK_WF_ItemFileInfo_WF_Item">
+            <End Role="WF_ItemSet" EntitySet="WF_ItemSet" />
+            <End Role="WF_ItemFileInfo" EntitySet="WF_ItemFileInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_ItemWF_Step" Association="Self.FK_WF_ItemWF_Step">
+            <End Role="WF_ItemSet" EntitySet="WF_ItemSet" />
+            <End Role="WF_StepSet" EntitySet="WF_StepSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_TempWF_Item" Association="Self.FK_WF_TempWF_Item">
+            <End Role="WF_TempSet" EntitySet="WF_TempSet" />
+            <End Role="WF_ItemSet" EntitySet="WF_ItemSet" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -526,29 +661,29 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TempName" Type="String" Nullable="false" MaxLength="32" />
-          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" />
-          <Property Name="TempForm" Type="String" Nullable="false" MaxLength="Max" />
-          <Property Name="Remark" Type="String" Nullable="true" MaxLength="64" />
-          <Property Name="Deflag" Type="Int16" Nullable="false" />
+          <Property Name="TempName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TempForm" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ActityType" Type="String" Nullable="false" />
+          <Property Name="ActityType" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="WF_Item" Relationship="OAModel.WF_TempWF_Item" FromRole="WF_Temp" ToRole="WF_Item" />
+          <Property Name="Delflag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="WF_Item">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
           <Property Name="StartBy" Type="Int32" Nullable="false" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Level" Type="Int16" Nullable="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" />
-          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Deflag" Type="Int16" Nullable="false" />
           <NavigationProperty Name="FileInfo" Relationship="OAModel.WF_ItemFileInfo" FromRole="WF_Item" ToRole="FileInfo" />
-          <Property Name="WFItemID" Type="String" Nullable="false" MaxLength="Max" />
+          <Property Name="WFItemID" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="WF_Temp" Relationship="OAModel.WF_TempWF_Item" FromRole="WF_Item" ToRole="WF_Temp" />
           <Property Name="WF_TempID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="WF_Step" Relationship="OAModel.WF_ItemWF_Step" FromRole="WF_Item" ToRole="WF_Step" />
@@ -558,11 +693,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FileName" Type="String" Nullable="false" MaxLength="32" />
-          <Property Name="FileType" Type="String" Nullable="true" MaxLength="32" />
-          <Property Name="FilePath" Type="String" Nullable="true" MaxLength="32" />
-          <Property Name="FileSize" Type="String" Nullable="true" MaxLength="32" />
-          <Property Name="Remark" Type="String" Nullable="true" MaxLength="64" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="FileType" Type="String" Nullable="true" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="FilePath" Type="String" Nullable="true" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="FileSize" Type="String" Nullable="true" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="64" Unicode="true" FixedLength="false" />
           <Property Name="Deflag" Type="Int16" Nullable="false" />
           <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="WF_Item" Relationship="OAModel.WF_ItemFileInfo" FromRole="FileInfo" ToRole="WF_Item" />
@@ -588,12 +723,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StepName" Type="String" Nullable="false" MaxLength="32" />
+          <Property Name="StepName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
           <Property Name="ProcessBy" Type="Int32" Nullable="false" />
           <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ProcessTime" Type="Time" Nullable="false" />
-          <Property Name="ProcessResult" Type="String" Nullable="false" />
-          <Property Name="ProcessCommit" Type="String" Nullable="false" />
+          <Property Name="ProcessTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProcessResult" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ProcessCommit" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Status" Type="Int16" Nullable="false" />
           <Property Name="IsStartStep" Type="Boolean" Nullable="false" />
           <Property Name="IsEndStep" Type="Boolean" Nullable="false" />
@@ -617,153 +752,222 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OAModelStoreContainer" CdmEntityContainer="OAEntities1">
-          <EntitySetMapping Name="ActionInfo">
-            <EntityTypeMapping TypeName="OAModel.ActionInfo">
-              <MappingFragment StoreEntitySet="ActionInfo">
-                <ScalarProperty Name="IsMenu" ColumnName="IsMenu" />
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OAModelStoreContainer" CdmEntityContainer="OAEntities1">
+    <EntitySetMapping Name="ActionInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.ActionInfo)">
+        <MappingFragment StoreEntitySet="ActionInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="HttpMethod" ColumnName="HttpMethod" />
+          <ScalarProperty Name="ActionMethodName" ColumnName="ActionMethodName" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="ActionInfoName" ColumnName="ActionInfoName" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ActionTypeEnum" ColumnName="ActionTypeEnum" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="IconWidth" ColumnName="IconWidth" />
+          <ScalarProperty Name="IconHeight" ColumnName="IconHeight" />
+          <ScalarProperty Name="IsMenu" ColumnName="IsMenu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.Books)">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="WordsCount" ColumnName="WordsCount" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="ContentDescription" ColumnName="ContentDescription" />
+          <ScalarProperty Name="AurhorDescription" ColumnName="AurhorDescription" />
+          <ScalarProperty Name="EditorComment" ColumnName="EditorComment" />
+          <ScalarProperty Name="TOC" ColumnName="TOC" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Clicks" ColumnName="Clicks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.Department)">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="TreePath" ColumnName="TreePath" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="IsLeaf" ColumnName="IsLeaf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeyWordsRank">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.KeyWordsRank)">
+        <MappingFragment StoreEntitySet="KeyWordsRank">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
+          <ScalarProperty Name="SearchCount" ColumnName="SearchCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="R_UserInfo_ActionInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.R_UserInfo_ActionInfo)">
+        <MappingFragment StoreEntitySet="R_UserInfo_ActionInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
+          <ScalarProperty Name="ActionInfoID" ColumnName="ActionInfoID" />
+          <ScalarProperty Name="IsPass" ColumnName="IsPass" />
+          <ScalarProperty Name="Deflag" ColumnName="Deflag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.RoleInfo)">
+        <MappingFragment StoreEntitySet="RoleInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SearchDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.SearchDetails)">
+        <MappingFragment StoreEntitySet="SearchDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
+          <ScalarProperty Name="SearchDateTime" ColumnName="SearchDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.UserInfo)">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UName" ColumnName="UName" />
+          <ScalarProperty Name="UPwd" ColumnName="UPwd" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_TempSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.WF_Temp)">
+        <MappingFragment StoreEntitySet="WF_TempSet">
+          <ScalarProperty Name="Delflag" ColumnName="Delflag" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
-                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="HttpMethod" ColumnName="HttpMethod" />
-                <ScalarProperty Name="ActionMethodName" ColumnName="ActionMethodName" />
-                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
-                <ScalarProperty Name="ActionInfoName" ColumnName="ActionInfoName" />
-                <ScalarProperty Name="Sort" ColumnName="Sort" />
-                <ScalarProperty Name="ActionTypeEnum" ColumnName="ActionTypeEnum" />
-                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
-                <ScalarProperty Name="IconWidth" ColumnName="IconWidth" />
-                <ScalarProperty Name="IconHeight" ColumnName="IconHeight" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Books">
-            <EntityTypeMapping TypeName="OAModel.Books">
-              <MappingFragment StoreEntitySet="Books">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
-                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
-                <ScalarProperty Name="WordsCount" ColumnName="WordsCount" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ContentDescription" ColumnName="ContentDescription" />
-                <ScalarProperty Name="AurhorDescription" ColumnName="AurhorDescription" />
-                <ScalarProperty Name="EditorComment" ColumnName="EditorComment" />
-                <ScalarProperty Name="TOC" ColumnName="TOC" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="Clicks" ColumnName="Clicks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Department">
-            <EntityTypeMapping TypeName="OAModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="DepName" ColumnName="DepName" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="TreePath" ColumnName="TreePath" />
-                <ScalarProperty Name="Level" ColumnName="Level" />
-                <ScalarProperty Name="IsLeaf" ColumnName="IsLeaf" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KeyWordsRank">
-            <EntityTypeMapping TypeName="OAModel.KeyWordsRank">
-              <MappingFragment StoreEntitySet="KeyWordsRank">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
-                <ScalarProperty Name="SearchCount" ColumnName="SearchCount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="R_UserInfo_ActionInfo">
-            <EntityTypeMapping TypeName="OAModel.R_UserInfo_ActionInfo">
-              <MappingFragment StoreEntitySet="R_UserInfo_ActionInfo">
-                <ScalarProperty Name="Deflag" ColumnName="Deflag" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
-                <ScalarProperty Name="ActionInfoID" ColumnName="ActionInfoID" />
-                <ScalarProperty Name="IsPass" ColumnName="IsPass" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RoleInfo">
-            <EntityTypeMapping TypeName="OAModel.RoleInfo">
-              <MappingFragment StoreEntitySet="RoleInfo">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
-                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="Sort" ColumnName="Sort" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SearchDetails">
-            <EntityTypeMapping TypeName="OAModel.SearchDetails">
-              <MappingFragment StoreEntitySet="SearchDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
-                <ScalarProperty Name="SearchDateTime" ColumnName="SearchDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInfo">
-            <EntityTypeMapping TypeName="OAModel.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfo">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UName" ColumnName="UName" />
-                <ScalarProperty Name="UPwd" ColumnName="UPwd" />
-                <ScalarProperty Name="SubTime" ColumnName="SubTime" />
-                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Sort" ColumnName="Sort" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="DepartmentActionInfo" TypeName="OAModel.DepartmentActionInfo" StoreEntitySet="DepartmentActionInfo">
-            <EndProperty Name="ActionInfo">
-              <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
-            </EndProperty>
-            <EndProperty Name="Department">
-              <ScalarProperty Name="ID" ColumnName="Department_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="RoleInfoActionInfo" TypeName="OAModel.RoleInfoActionInfo" StoreEntitySet="RoleInfoActionInfo">
-            <EndProperty Name="ActionInfo">
-              <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
-            </EndProperty>
-            <EndProperty Name="RoleInfo">
-              <ScalarProperty Name="ID" ColumnName="RoleInfo_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserInfoDepartment" TypeName="OAModel.UserInfoDepartment" StoreEntitySet="UserInfoDepartment">
-            <EndProperty Name="Department">
-              <ScalarProperty Name="ID" ColumnName="Department_ID" />
-            </EndProperty>
-            <EndProperty Name="UserInfo">
-              <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserInfoRoleInfo" TypeName="OAModel.UserInfoRoleInfo" StoreEntitySet="UserInfoRoleInfo">
-            <EndProperty Name="RoleInfo">
-              <ScalarProperty Name="ID" ColumnName="RoleInfo_ID" />
-            </EndProperty>
-            <EndProperty Name="UserInfo">
-              <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+          <ScalarProperty Name="TempName" ColumnName="TempName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TempForm" ColumnName="TempForm" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ActityType" ColumnName="ActityType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_ItemSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.WF_Item)">
+        <MappingFragment StoreEntitySet="WF_ItemSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="StartBy" ColumnName="StartBy" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Deflag" ColumnName="Deflag" />
+          <ScalarProperty Name="WFItemID" ColumnName="WFItemID" />
+          <ScalarProperty Name="WF_TempID" ColumnName="WF_TempID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileInfoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.FileInfo)">
+        <MappingFragment StoreEntitySet="FileInfoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Deflag" ColumnName="Deflag" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WF_StepSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OAModel.WF_Step)">
+        <MappingFragment StoreEntitySet="WF_StepSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StepName" ColumnName="StepName" />
+          <ScalarProperty Name="ProcessBy" ColumnName="ProcessBy" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ProcessTime" ColumnName="ProcessTime" />
+          <ScalarProperty Name="ProcessResult" ColumnName="ProcessResult" />
+          <ScalarProperty Name="ProcessCommit" ColumnName="ProcessCommit" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsStartStep" ColumnName="IsStartStep" />
+          <ScalarProperty Name="IsEndStep" ColumnName="IsEndStep" />
+          <ScalarProperty Name="ParentStepID" ColumnName="ParentStepID" />
+          <ScalarProperty Name="WF_ItemID" ColumnName="WF_ItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DepartmentActionInfo" TypeName="OAModel.DepartmentActionInfo" StoreEntitySet="DepartmentActionInfo">
+      <EndProperty Name="ActionInfo">
+        <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="Department_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RoleInfoActionInfo" TypeName="OAModel.RoleInfoActionInfo" StoreEntitySet="RoleInfoActionInfo">
+      <EndProperty Name="ActionInfo">
+        <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="RoleInfo">
+        <ScalarProperty Name="ID" ColumnName="RoleInfo_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserInfoDepartment" TypeName="OAModel.UserInfoDepartment" StoreEntitySet="UserInfoDepartment">
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="Department_ID" />
+      </EndProperty>
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserInfoRoleInfo" TypeName="OAModel.UserInfoRoleInfo" StoreEntitySet="UserInfoRoleInfo">
+      <EndProperty Name="RoleInfo">
+        <ScalarProperty Name="ID" ColumnName="RoleInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WF_ItemFileInfo" TypeName="OAModel.WF_ItemFileInfo" StoreEntitySet="WF_ItemFileInfo">
+      <EndProperty Name="WF_Item">
+        <ScalarProperty Name="ID" ColumnName="WF_Item_ID" />
+      </EndProperty>
+      <EndProperty Name="FileInfo">
+        <ScalarProperty Name="Id" ColumnName="FileInfo_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -777,7 +981,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
       </DesignerInfoPropertySet>
     </Options>

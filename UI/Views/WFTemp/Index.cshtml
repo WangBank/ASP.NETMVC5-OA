@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Model.UserInfo>
+﻿@model Model.WF_Temp
+
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,7 @@
     <script src="~/Scripts/locale/easyui-lang-zh_CN.js"></script>
     <script src="~/Scripts/jquery.easyui-1.4.5.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
     @*初始化表格*@
     <script type="text/javascript">
         $(function () {
@@ -20,26 +23,34 @@
             //表单初始为隐藏
             $("#addDiaLogDiv").css("display", "none");
             $("#editDiaLogDiv").css("display", "none");
-            $("#setRoleDiaLogDiv").css("display", "none");
-            $("#setActionDiaLogDiv").css("display", "none");
+            $("#conUrl").css("display", "none");
+            //搜索传参
             bindSearchBtnClick();
+            //是否是菜单绑定事件
+            bindIsMenuClick();
         });
 
+        function bindIsMenuClick() {
+            $("#IsMenu").change(function () {
+                //显示或者隐藏图标地址
+                $("#conUrl").toggle();
+            });
+        }
         function bindSearchBtnClick() {
             $("#btnSearch").click(function () {
                 var data = { searchName: $("#txtsName").val(), searchRemark: $("#txtSchRemark").val() };
                 initTable(data);
             });
         }
-        //初始化用户信息表格
+        //初始化流程模板信息表格
         function initTable(queryParams) {
             $('#tt').datagrid({
-                url: '/UserInfo/GetAll',//rows page 默认发送的两个数据
-                title: '用户信息列表',
-                width: 700,
-                height: 400,
+                url: '/WFTemp/GetAllTempInfos',//rows page 默认发送的两个数据
+                title: '流程模板信息列表',
+                width: 1200,
+                height: 500,
                 idField: 'ID',
-                loadMsg: '正在加载用户信息。。。。',
+                loadMsg: '正在加载流程模板信息。。。。',
                 pagination: true,
                 singleSelect: false,
                 pagesize: 10,
@@ -47,11 +58,16 @@
                 pagelist: [10, 20, 30],
                 queryParams: queryParams,//让表格加载数据的时候额外传输的数据
                 columns: [[
+                    //        a.ID,
+                    //a.TempName,
+                    //a.Remark,
+                    //a.SubTime,
+                    //a.ActityType,
+                    //a.Delflag
                     { field: 'ck', checkbox: true, align: 'left', width: 50 },
-                    { field: 'ID', title: '用户编号', width: 80 },
-                    { field: 'UserName', title: '用户名', align: 'left', width: 120 },
+                    { field: 'ID', title: '流程模板编号', width: 80 },
+                    { field: 'TempName', title: '流程模板名称', align: 'left', width: 120 },
                     { field: 'Remark', title: '备注', align: 'left', width: 120 },
-                    { field: 'Pwd', title: '密码', align: 'left', width: 120 },
                     {
                         field: 'SubTime', title: '提交时间', align: 'left', width: 110, align: 'right', formatter: function (value) {
                             var date = new Date(parseInt(value.replace("/Date(", "").replace(")/", ""), 10));
@@ -60,15 +76,16 @@
                             //return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
                             return date.getFullYear() + "-" + month + "-" + currentDate;
                         }
-                    }
+                    }, { field: 'ActityType', title: '操作',width: 120 }
+
                 ]],
 
-                //用户信息页面上的按钮
+                //流程模板信息页面上的按钮
                 toolbar: [
 
-                 //用户信息页面，添加按钮
+                 //流程模板信息页面，添加按钮
                     {id: 'btnDownShelf',
-                    text: '添加用户',
+                    text: '添加流程模板',
                     iconCls: 'icon-add',
                     handler: function () {
                         //弹出对话框
@@ -76,36 +93,18 @@
                     }
                     },
 
-                     //用户信息页面，修改按钮
+                     //流程模板信息页面，修改按钮
                      { id: 'btnEdit',
-                         text: '修改用户',
+                         text: '修改流程模板',
                          iconCls: 'icon-edit',
                          handler: function () {
                              editClickEvent();
                          }
                      },
-                    //用户信息页面，设置角色按钮
-                     { id: 'btnSetRole',
-                         text: '设置角色',
-                         iconCls: 'icon-redo',
-                         handler: function () {
-                             setRoleClickEvent();
-                         }
-                     }
-                     ,
-                   //用户信息页面，设置角色按钮
-                     {
-                         id: 'btnSetRole',
-                         text: '设置特殊权限',
-                         iconCls: 'icon-redo',
-                         handler: function () {
-                             setActionClickEvent();
-                         }
-                     }
-                     ,
-                      //用户信息页面，删除按钮
+
+                      //流程模板信息页面，删除按钮
                      {id: 'btnDelete',
-                    text: '删除用户',
+                    text: '删除流程模板',
                     iconCls: 'icon-cancel',
                     handler: function () {
                         deleteEvent();
@@ -116,100 +115,14 @@
                 }
             });
         }
-        
-        //当用户点击设置角色按钮发生事件
-        function setRoleClickEvent() {
-            //校验是否选中一个用户信息
-            var selections = $('#tt').datagrid("getSelections");
-            if (selections.length != 1) {
-                $.messager.alert("错误提醒", "请选择一行要设置角色的信息", "question");
-                return;
-            }
-            //给setRoleframe的src属性赋值
-            $("#setRoleframe").attr("src", "/UserInfo/SetRole/" + selections[0].ID);
 
-            $("#setRoleDiaLogDiv").css("display", "block");
-            $("#setRoleDiaLogDiv").dialog({
-                title: '设置用户角色信息',
-                modal: true,
-                width: 400,
-                height: 400,
-                collapsible: true,
-                minimizable: true,
-                maximizable: true,
-                resizable: true,
-                //页面按钮
-                buttons: [
-                    {
-                        id: 'btnOK',
-                        text: '确认修改',
-                        iconCls: 'icon-ok',
-                        handler: function () {
-                            $("#setRoleframe")[0].contentWindow.submitForm();
-                        }
-                    },
-
-                    {
-                        id: 'btnCancel',
-                        text: '取消',
-                        iconCls: 'icon-cancel',
-                        handler: function () {
-                            $("#setRoleDiaLogDiv").dialog("close");
-                        }
-                    }
-                ]
-            });
-        }
-
-        //设置特殊权限
-        function setActionClickEvent() {
-            //校验是否选中一个用户信息
-            var selections = $('#tt').datagrid("getSelections");
-            if (selections.length != 1) {
-                $.messager.alert("错误提醒", "请选择一行要设置角色的信息", "question");
-                return;
-            }
-            //给setActionframe的src属性赋值
-            $("#setActionframe").attr("src", "/UserInfo/SetAction/" + selections[0].ID);
-
-            $("#setActionDiaLogDiv").css("display", "block");
-            $("#setActionDiaLogDiv").dialog({
-                title: '设置用户角色信息',
-                modal: true,
-                width: 600,
-                height: 400,
-                collapsible: true,
-                minimizable: true,
-                maximizable: true,
-                resizable: true
-                ////页面按钮
-                //buttons: [
-                //    {
-                //        id: 'btnOK',
-                //        text: '确认修改',
-                //        iconCls: 'icon-ok',
-                //        handler: function () {
-                //            $("#setActionframe")[0].contentWindow.submitForm();
-                //        }
-                //    },
-
-                //    {
-                //        id: 'btnCancel',
-                //        text: '取消',
-                //        iconCls: 'icon-cancel',
-                //        handler: function () {
-                //            $("#setActionDiaLogDiv").dialog("close");
-                //        }
-                //    }
-                //]
-            });
-        }
-
-        //当用户点添加，弹出对话框
+        //当流程模板点添加，弹出对话框
         function addClickEvent() {
+            //给iframe标签修改str属性
+            $("#AddDiaLogDiv").attr("src", "/WFTemp/Add");
             $("#addDiaLogDiv").css("display", "block");
             $("#addDiaLogDiv").dialog({
-                title: '添加用户信息',
+                title: '添加流程模板信息',
                 modal: true,
                 width: 400,
                 height: 400,
@@ -238,20 +151,20 @@
             });
         }
 
-        //当用户点击修改按钮发生事件
+        //当流程模板点击修改按钮发生事件
         function editClickEvent() {
-            //校验是否选中一个用户信息
+            //校验是否选中一个流程模板信息
             var selections = $('#tt').datagrid("getSelections");
             if (selections.length != 1) {
                 $.messager.alert("错误提醒", "请选择一行要删除的信息", "question");
                 return;
             }
             //给editFrame的src属性赋值
-            $("#editframe").attr("src", "/UserInfo/Edit/" + selections[0].ID);
+            $("#editframe").attr("src", "/RoleInfo/Edit/" + selections[0].ID);
 
             $("#editDiaLogDiv").css("display", "block");
             $("#editDiaLogDiv").dialog({
-                title: '修改用户信息',
+                title: '修改流程模板信息',
                 modal: true,
                 width: 400,
                 height: 400,
@@ -282,7 +195,7 @@
             });
         }
 
-        //当用户点击删除按钮时发生事件
+        //当流程模板点击删除按钮时发生事件
         function deleteEvent() {
                 //拿到选中的项，api
                 var selections = $('#tt').datagrid("getSelections");
@@ -299,7 +212,7 @@
                 ids = ids.substr(0, ids.length - 1);
                 //alert(ids);
                 //当删除成功的时候，刷新页面
-                $.post("/UserInfo/Delete", { ids: ids }, function (data) {
+                $.post("/RoleInfo/Delete", { ids: ids }, function (data) {
                     if (data == "ok") {
                         //刷新表格
                         initTable();
@@ -338,13 +251,6 @@
                 initTable();
         }
 
-        //设置角色成功的回调事件
-        function afterSetRole(data) {
-            //关闭对话框并刷新表格
-            $("#setRoleDiaLogDiv").dialog("close");
-            initTable();
-        }
-
         //将json时间转化为string
         function ChangeDateFormat(cellval) {
             var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
@@ -357,50 +263,24 @@
 
 </head>
 <body>
+    @*搜索栏*@
     <div>
-        用户名:<input type="text" name="txtSchName" id="txtsName"/> 备注:<input type="text" name="txtsRemark"  id="txtSchRemark"/> <input id="btnSearch" type="button" value="搜索" />
+        流程模板名:<input type="text" name="txtSchName" id="txtsName" /> 备注:<input type="text" name="txtsRemark" id="txtSchRemark" /> <input id="btnSearch" type="button" value="搜索" />
     </div>
 
     <table id="tt" style="width:700px;" title="标题，可以用代码" iconcls="icon-edit"></table>
-    @* 添加用户信息div开始 *@
-    <div id="addDiaLogDiv">
-                @using (Ajax.BeginForm("Create", "UserInfo", new AjaxOptions() { OnSuccess = "afterAdd" }))
-                {<table>
-            <tr>
-                <td>用户名：</td>
-                <td><input type="text" name="UName" /></td>
-            </tr>
-            <tr>
-                <td>备注：</td>
-                <td><input type="text" name="Remark" /></td>
-            </tr>
-            <tr>
-                <td>密码：</td>
-                <td><input type="text" name="UPwd" /></td>
-            </tr>
-        </table>
-                }
+    @* 添加流程模板信息div开始 *@
+    <div id="AddDiaLogDiv">
+        <iframe id="Addframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
+    </div>
+    @* 添加流程模板信息div结束 *@
 
-</div>
-    @* 添加用户信息div结束 *@
-
-    @* 修改用户信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
+    @* 修改流程模板信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
     <div id="editDiaLogDiv">
-        <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes" ></iframe>
+        <iframe id="editframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
     </div>
-    @* 修改用户信息div结束 *@
-
-    @* 设置用户角色信息div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
-    <div id="setRoleDiaLogDiv">
-        <iframe id="setRoleframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
-    </div>
-    @* 设置用户角色信息div结束 *@
-
-    @* 设置用户特殊权限div开始 ，用iframe标签 初始化的时候可以赋值 不是很好*@
-    <div id="setActionDiaLogDiv">
-        <iframe id="setActionframe" src="javascript:void(0)" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
-    </div>
-    @* 设置用户特殊权限div结束 *@
+    @* 修改流程模板信息div结束 *@
 
 </body>
 </html>
+

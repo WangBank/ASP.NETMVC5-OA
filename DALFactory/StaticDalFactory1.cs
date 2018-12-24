@@ -1,4 +1,7 @@
-﻿ 
+﻿
+
+ 
+
 
 using DAL;
 using IDAL;
@@ -36,6 +39,14 @@ namespace DALFactory
             //return new DepartmentDal();
            
             return Assembly.Load(AssemblyName).CreateInstance(AssemblyName + ".DepartmentDal") as IDepartmentDal;  
+        }
+   
+		 public static IFileInfoDal GetFileInfoDal()
+        {
+            //通过反射的方式,不需要new了
+            //return new FileInfoDal();
+           
+            return Assembly.Load(AssemblyName).CreateInstance(AssemblyName + ".FileInfoDal") as IFileInfoDal;  
         }
    
 		 public static IKeyWordsRankDal GetKeyWordsRankDal()
@@ -77,5 +88,30 @@ namespace DALFactory
            
             return Assembly.Load(AssemblyName).CreateInstance(AssemblyName + ".UserInfoDal") as IUserInfoDal;  
         }
+   
+		 public static IWF_ItemDal GetWF_ItemDal()
+        {
+            //通过反射的方式,不需要new了
+            //return new WF_ItemDal();
+           
+            return Assembly.Load(AssemblyName).CreateInstance(AssemblyName + ".WF_ItemDal") as IWF_ItemDal;  
+        }
+   
+		 public static IWF_StepDal GetWF_StepDal()
+        {
+            //通过反射的方式,不需要new了
+            //return new WF_StepDal();
+           
+            return Assembly.Load(AssemblyName).CreateInstance(AssemblyName + ".WF_StepDal") as IWF_StepDal;  
+        }
+   
+		 public static IWF_TempDal GetWF_TempDal()
+        {
+            //通过反射的方式,不需要new了
+            //return new WF_TempDal();
+           
+            return Assembly.Load(AssemblyName).CreateInstance(AssemblyName + ".WF_TempDal") as IWF_TempDal;  
+        }
+
 }
 }

@@ -1,4 +1,7 @@
-﻿ 
+﻿
+
+ 
+
 
 using DAL;
 using DALFactory;
@@ -54,6 +57,14 @@ namespace BLL
         }
 		}
     
+	    public partial class FileInfoService : BaseServices<FileInfo>,IFileInfoService
+    {
+        public override void SetCurrent()
+        {
+            CurrentDal = this.DbSession.FileInfoDal;
+        }
+		}
+    
 	    public partial class KeyWordsRankService : BaseServices<KeyWordsRank>,IKeyWordsRankService
     {
         public override void SetCurrent()
@@ -93,5 +104,30 @@ namespace BLL
             CurrentDal = this.DbSession.UserInfoDal;
         }
 		}
+    
+	    public partial class WF_ItemService : BaseServices<WF_Item>,IWF_ItemService
+    {
+        public override void SetCurrent()
+        {
+            CurrentDal = this.DbSession.WF_ItemDal;
+        }
+		}
+    
+	    public partial class WF_StepService : BaseServices<WF_Step>,IWF_StepService
+    {
+        public override void SetCurrent()
+        {
+            CurrentDal = this.DbSession.WF_StepDal;
+        }
+		}
+    
+	    public partial class WF_TempService : BaseServices<WF_Temp>,IWF_TempService
+    {
+        public override void SetCurrent()
+        {
+            CurrentDal = this.DbSession.WF_TempDal;
+        }
+		}
+
 
 }

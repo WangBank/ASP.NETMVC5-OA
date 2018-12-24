@@ -6,7 +6,10 @@ using System.Activities;
 
 namespace ActivityLibrary
 {
-
+    /// <summary>
+    /// WorkFlow
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public sealed class WaitForInputCodeActivity<T> : NativeActivity
     {
         // 定义一个字符串类型的活动输入参数

@@ -1,4 +1,9 @@
-﻿using Model;
+﻿
+
+ 
+
+
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +28,10 @@ namespace IBLL
     {
 	}
     
+	    public partial interface IFileInfoService:IBaseService<FileInfo>
+    {
+	}
+    
 	    public partial interface IKeyWordsRankService:IBaseService<KeyWordsRank>
     {
 	}
@@ -42,5 +51,18 @@ namespace IBLL
 	    public partial interface IUserInfoService:IBaseService<UserInfo>
     {
 	}
+    
+	    public partial interface IWF_ItemService:IBaseService<WF_Item>
+    {
+	}
+    
+	    public partial interface IWF_StepService:IBaseService<WF_Step>
+    {
+	}
+    
+	    public partial interface IWF_TempService:IBaseService<WF_Temp>
+    {
+	}
+
 
 }

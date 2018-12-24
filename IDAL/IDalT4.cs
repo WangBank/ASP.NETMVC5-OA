@@ -1,4 +1,7 @@
-﻿ 
+﻿
+
+ 
+
 
 using Model;
 using System;
@@ -19,6 +22,9 @@ namespace IDAL
     public partial interface IDepartmentDal:IBaseDal<Department> 
     {
     } 
+    public partial interface IFileInfoDal:IBaseDal<FileInfo> 
+    {
+    } 
     public partial interface IKeyWordsRankDal:IBaseDal<KeyWordsRank> 
     {
     } 
@@ -34,5 +40,15 @@ namespace IDAL
     public partial interface IUserInfoDal:IBaseDal<UserInfo> 
     {
     } 
+    public partial interface IWF_ItemDal:IBaseDal<WF_Item> 
+    {
+    } 
+    public partial interface IWF_StepDal:IBaseDal<WF_Step> 
+    {
+    } 
+    public partial interface IWF_TempDal:IBaseDal<WF_Temp> 
+    {
+    } 
+
 
 }

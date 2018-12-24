@@ -265,6 +265,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RoleInfoController.cs" />
+    <Compile Include="Controllers\WFTempController.cs" />
     <Compile Include="fonts\ManageController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1259,6 +1260,8 @@
     <Content Include="Views\UserInfo\SetRole.cshtml" />
     <Content Include="Views\ActionInfo\SetRole.cshtml" />
     <Content Include="Views\UserInfo\SetAction.cshtml" />
+    <Content Include="Views\WFTemp\Index.cshtml" />
+    <Content Include="Views\WFTemp\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\login\" />

@@ -1,4 +1,7 @@
-﻿ 
+﻿
+
+ 
+
 namespace IDAL
 {
     public partial interface IDbSession
@@ -14,6 +17,9 @@ namespace IDAL
 	IDepartmentDal DepartmentDal { get; }
 
     
+	IFileInfoDal FileInfoDal { get; }
+
+    
 	IKeyWordsRankDal KeyWordsRankDal { get; }
 
     
@@ -27,6 +33,16 @@ namespace IDAL
 
     
 	IUserInfoDal UserInfoDal { get; }
+
+    
+	IWF_ItemDal WF_ItemDal { get; }
+
+    
+	IWF_StepDal WF_StepDal { get; }
+
+    
+	IWF_TempDal WF_TempDal { get; }
+
 
 }
 }
